@@ -1,0 +1,408 @@
+@import url('./fonts/font.css');
+@import url('./header.css');
+
+
+
+
+
+
+/*  BODY CSS   */
+#mic_body_container
+{
+    flex: 1;
+}
+
+#mic_body_container_main
+{
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 100%;
+    width: 80%;
+
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+
+    background-color: rgba(255, 255, 255,.43);
+}
+
+#mic_main_header
+{
+    margin-bottom: 20px;
+}
+
+#current_location
+{
+    margin-top: 5px;
+    margin-left: 5px;
+
+    color: rgba(112, 112, 112,.9);
+}
+
+#current_location a
+{  
+    font-family: "OpenSans-SemiBold";
+    font-size: 15px;
+    text-decoration: none;
+    color: rgba(112, 112, 112,.9);
+}
+
+#current_location a:hover
+{
+    text-decoration: underline;
+    color: rgba(112, 112, 112,1);
+}
+
+
+
+/*  FORUM INFO CSS  */
+#forum_info
+{
+    margin-bottom: 20px;
+}
+
+
+
+
+#forum_info_main
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 5px 5px 5px rgba(24, 31, 65,.2) ;
+    background-color: rgba(247,247,247,.78);
+}
+
+#forum_desc
+{
+    padding-left: 10px;
+    padding-bottom: 10px;
+    font-family: "OpenSans-Regular";
+    font-size:16px ;
+
+    color: rgba(0, 0, 0, 0.8);
+
+    border-bottom: 2px solid rgba(24, 31, 65,.16);
+
+}
+#forum_options
+{
+    padding-top: 10px;
+    padding-left: 10px;
+    display: flex;
+
+}
+
+#forum_options div
+{
+    padding-top:1px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+#forum_options a
+{
+    
+    font-family: "OpenSans-Regular";
+    font-size: 13px;
+    
+    text-decoration: none;
+
+    color: rgba(0,0,0,.7);
+}
+
+#forum_options a:hover
+{
+    color: rgba(247,247,247,.8);
+}
+#forum_subscribe
+{
+    width: 100px;
+    height: 26px;
+
+    border-radius: 2px;
+    background-color: rgba(235,0,0,.76);
+    box-shadow: 1px 1px 5px rgba(0,0,0,.4);
+
+}
+
+
+#forum_share
+{
+    width: 100px;
+    height:26px;
+
+    border-radius: 2px;
+    background-color: rgba(235,0,0,.76);
+    box-shadow: 1px 1px 10px rgba(0,0,0,.4);
+}
+
+
+/************************/
+
+
+/* SUBFORUM CSS*/
+#subforum
+{
+    margin-bottom: 20px;
+}
+
+
+#subforum_main
+{
+    box-shadow: 5px 5px 5px rgba(24, 31, 65,.2) ;
+    background-color: rgba(247,247,247,.78);
+}
+
+.forum_d_item
+{
+    padding-top: 5px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+
+    display: flex;
+    justify-content: space-between;
+
+    border-bottom: 2px solid rgba(24, 31, 65,.16);
+}
+.forum_d_item_logo
+{
+    margin-right: 10px;
+    align-self: center;
+}
+.forum_d_item_logo,.forum_d_item_logo img
+{
+    
+    width: 50px;
+    height: 50px;  
+}
+
+.forum_d_item_info
+{
+    flex: 1;
+    font-family: "OpenSans-SemiBold";
+}
+
+.forum_d_item_title
+{
+   font-size: 17px;
+   text-decoration: none;
+
+   color: rgba(24, 31, 65,.86);
+}
+
+.forum_d_item_title:hover
+{
+   color: rgba(24, 31, 65,1);
+}
+
+.forum_d_item_desc
+{
+    font-size: 13px;
+    color:  rgba(0, 0, 0, .5);
+}
+
+.forum_d_item_subf
+{
+    font-size: 13px;
+    color:  rgba(0, 0, 0, .5);
+}
+
+.subf_link
+{
+    font-family: "OpenSans-Bold";
+    color:  rgba(24, 31, 65,.8);
+    text-decoration: none;
+}   
+
+.subf_link:hover
+{
+    color:  rgba(24, 31, 65,1);  
+}   
+
+.forum_d_item_stats
+{
+    margin-right: 20px;
+    width: 100px;
+    align-self: center;
+    
+    display: flex;
+    justify-content: space-between;
+    
+    font-family: "OpenSans-SemiBold ";
+    font-size: 15px;
+    
+
+    opacity: 0.5;
+}
+
+
+
+
+
+/*  TOPICS CSS  */
+
+#forum_topics_container
+{
+    margin-bottom: 20px;
+}
+
+
+#forum_topics_main
+{
+  
+    box-shadow: 5px 5px 5px rgba(24, 31, 65,.2) ;
+    background-color: rgba(247,247,247,.78);
+}
+
+.l_f_topic
+{
+
+    display: flex;
+    justify-content: space-between;
+
+    border-bottom: 2px solid rgba(24, 31, 65,.16);
+}
+.topic_info
+{
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-left: 15px;
+
+    flex: 1;
+}
+
+.topic_t
+{
+    word-break: break-all;
+    display: flex;
+}
+.topic_context_icon
+{
+    margin-right: 5px;
+    width: 39px;
+    height: 21px;
+ 
+    align-self: center;
+    display: flex;
+   
+    border-radius: 5px;
+    background: linear-gradient(to bottom, #0d1d80 0%, #8d8d8d 100%);
+}
+.context_title
+{
+    width: 100%;
+    align-self: center;
+
+    font-family: "OpenSans-Regular";
+    font-size: 10px;
+    text-align: center;
+    color: white;
+}
+.topic_title
+{
+    flex:1;
+    font-size: 16px;
+    font-family: "OpenSans-SemiBold";
+    text-decoration: none;
+    color: rgba(24, 31, 65,.8);
+}
+.topic_title:hover
+{
+    color: rgba(24, 31, 65,1);
+}
+.topic_metadata
+{
+    /* 39 + 5   width of the icon + margin right*/
+    margin-left:44;
+}
+.topic_sup_info
+{
+    font-family: "OpenSans-SemiBold";
+    font-size: 12px;
+    color: rgba(0, 0, 0, .4);
+
+    word-wrap: break-word;
+}
+.topic_owner
+{
+    font-family: "OpenSans-Bold";
+    opacity: .7;
+    cursor: pointer;
+}
+.topic_owner:hover
+{
+  opacity: 1;
+}
+
+
+.topic_stats
+{  
+    margin-right: 30px;
+    width: 100px;
+    
+    align-self: center;
+    display: flex;
+    justify-content: space-between;
+
+
+    font-family: "OpenSans-SemiBold ";
+    font-size: 15px;
+
+    opacity: 0.5;
+}
+
+.topic_reviver
+{
+   
+    height: 50px;
+    width: 150px;
+    display: flex
+}
+.reviver_picture img
+{
+    border: 1px solid rgba(24, 31, 65,.2); 
+}
+.reviver_picture
+{
+    margin-right: 5px;
+
+    align-self: center;
+    box-shadow: 1px 1px 5px rgba(24, 31, 65,.2);
+}
+.reviver_picture,.reviver_picture img
+{
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+}
+.reviver_info
+{
+    flex: 1;
+    align-self: center;
+
+    display: flex;
+    flex-direction: column;
+    font-family: "OpenSans-SemiBold";
+}
+.reviver_u_name
+{
+    align-self: center;
+
+    font-size: 15px;
+    opacity: .9;
+
+    text-decoration: none;
+}
+.reviver_u_name:hover
+{
+    opacity: 1;
+}
+.reviving_datetime
+{
+    align-self: center;
+    font-size: 10px;
+    color: rgba(0, 0, 0, .8);
+}
+
+/**************************************/

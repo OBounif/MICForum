@@ -1,0 +1,118 @@
+@import url('./fonts/font.css');
+@import url('./header.css');
+
+
+
+
+/*  BODY CSS   */
+#mic_body_container
+{
+    flex: 1;
+}
+
+#mic_body_container_main
+{
+    height: 100%;
+    width: 80%;
+
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+
+    background-color: rgba(255, 255, 255,.43);
+
+}
+
+#mic_main_header
+{
+    margin-bottom: 20px;
+}
+
+#current_location
+{
+    margin-top: 5px;
+    margin-left: 5px;
+
+    color: rgba(112, 112, 112,.9);
+}
+
+#current_location a
+{  
+    font-family: "OpenSans-SemiBold";
+    font-size: 15px;
+    text-decoration: none;
+    color: rgba(112, 112, 112,.9);
+}
+
+#current_location a:hover
+{
+    text-decoration: underline;
+    color: rgba(112, 112, 112,1);
+}
+
+
+.staff
+{
+    margin-bottom: 20px;
+}
+
+.staff_header
+{
+    padding-left: 20px;
+    height: 49px;
+    
+    display: flex;
+    
+    
+    box-shadow: 5px 5px 6px rgba(24, 31, 65,.2) ;
+    background-color: rgba(0,0,0,0.88);
+}
+
+.staff_title
+{
+    align-self: center;
+   
+    font-family: "OpenSans-Regular";
+    font-size: 19px;
+    font-weight: normal;
+   
+    color: rgba(247,247,247,.8);
+
+    cursor: pointer;
+}
+
+
+.staff_title:hover
+{
+    color: rgba(247,247,247,1);
+}
+
+.staff_main
+{
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  
+    
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.staff_user
+{
+    margin-right: 15px;
+    margin-bottom: 5px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+
+}
+
+.staff_user img{
+    width: 55px;
+    height: 55px;
+
+    border-radius: 50%;
+    box-shadow: 2px 2px 3px rgba(24, 31, 65,.2);
+    border: 2px solid rgb(250, 6, 6); 
+}

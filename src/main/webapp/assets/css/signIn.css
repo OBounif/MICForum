@@ -1,0 +1,214 @@
+@import url('./fonts/font.css');
+@import url('./header.css');
+
+
+
+
+
+
+/*  BODY CSS   */
+#mic_body_container
+{
+    flex: 1;
+   display: flex;
+   flex-direction: column;
+}
+
+#mic_body_container_main
+{
+    padding-left: 10px;
+    padding-right: 10px;
+   
+    flex:1;
+    width: 80%;
+    
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+
+   
+}
+
+#mic_main_header
+{
+    margin-bottom: 20px;
+}
+
+#current_location
+{
+    margin-top: 5px;
+    margin-left: 5px;
+
+    color: rgba(112, 112, 112,.9);
+}
+
+#current_location a
+{  
+    font-family: "OpenSans-SemiBold";
+    font-size: 15px;
+    text-decoration: none;
+    color: rgba(112, 112, 112,.9);
+}
+
+#current_location a:hover
+{
+    text-decoration: underline;
+    color: rgba(112, 112, 112,1);
+}
+
+
+
+/* log css*/
+#mic_main_body
+{
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    width: 500px;
+}
+#signin_h
+{
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#signin_h h2{
+    font-size: 28px;
+    color: rgba(24, 31, 65,0.9);
+    text-shadow: 0px 3px 6px rgba(24, 31, 65,0.3) ;
+}
+
+#signin_h h3{
+    font-size: 17px;
+    color: rgba(112, 112, 112, 1);
+}
+#signin_h h3 a
+{
+    font-family: "OpenSans-Italic";
+    color: rgba(24, 31, 65,0.7);
+    text-decoration: none;
+}
+#signin_h h3 a:hover
+{
+    color: rgba(24, 31, 65,0.9);
+}
+
+#sign_in_status
+{
+    min-height: 40px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 7px;
+
+    word-break: break-all;
+    font-family: "OpenSans-Regular";
+    color: rgba(112, 112, 112, 1);
+
+}
+
+.success
+{
+    background-color: rgba(6, 133, 17, 0.767);
+}
+.error
+{
+    background-color: rgba(247, 30, 52, 0.774);
+}
+
+#sign_in_status p
+{
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    color: rgba(219, 219, 219,1);
+}
+
+#sign_in_status p i{
+    margin-right: 5px;
+}
+
+#signin_b
+{
+}
+
+#signin_f
+{
+    margin:auto;
+    width: 60%;
+
+    display: flex;
+    flex-direction: column;
+
+    font-family: "OpenSans-SemiBold";
+    color: rgba(112, 112, 112,1);
+    text-shadow: 0px 3px 6px rgba(112, 112, 112,.2);
+}
+
+#signin_f p
+{
+    font-size: 14px;
+}
+
+#signin_f input[type="text"],#signin_f input[type="password"],#signin_f input[type="email"]{
+    padding-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 90%;
+    align-self: flex-end;
+    height: 30px;
+
+
+    font-family: "OpenSans-SemiBold";
+    color: rgba(112,112,112,.9);
+
+
+    border-radius: 5px;
+    border:2px solid rgba(219, 219, 219,1);
+    background-color: rgba(255,255,255,1);
+
+
+    outline:0px;
+}
+
+#checkbox_cont
+{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#checkbox_cont p
+{
+    font-size: 13px;
+}
+
+#remember_me
+{
+    display: flex;
+}
+
+#submit_butt
+{
+    width: 100%;
+    height: 30px;
+
+    font-family: "OpenSans-Regular";
+    font-size: 17px;
+    color: rgba(247,247,247,.7);
+    
+    
+    background-color: rgba(0, 0, 0,.88);
+    box-shadow: 5px 5px 6px rgba(24, 31, 65,0.38);
+    border-radius: 2px;
+    border: none;
+    outline: 0px;
+
+    cursor: pointer;
+}
+
+#submit_butt:hover
+{
+    color: rgba(247,247,247,1);
+    box-shadow: 5px 5px 6px rgba(24, 31, 65,0.5);
+
+}
+
