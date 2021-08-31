@@ -213,7 +213,38 @@
     background-color: rgba(0, 0, 0, 1);
 }
 
+#user_options
+{
+    text-align: right;
+    margin-bottom: 20px;
+}
 
+.creat_butt
+{
+    
+    height: 30px;
+    width: 200px;
+
+    color: rgba(247,247,247,.8);
+    font-size: 14px;
+    font-family: "OpenSans-Regular";
+
+    border: none;
+    border-radius:3px;
+    background-color:rgba(0, 0, 0, .8);
+
+    box-shadow: 1px 1px 5px rgba(24, 31, 65,.5);
+
+    outline: 0px;
+    cursor: pointer;
+}
+
+.creat_butt:hover
+{
+    color: rgba(247,247,247,.9);
+    background-color:rgba(0, 0, 0, .9);
+    box-shadow: 1px 1px 5px rgba(24, 31, 65,.8);
+}
 
 /*  BODY   */
 #forum_main_body
