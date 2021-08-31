@@ -1,8 +1,9 @@
 package com.bounifomar.micforum.models.mforum;
 
 import java.io.Serializable;
-import java.sql.Date;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -48,6 +49,20 @@ public class Forum implements Serializable {
 	private List<Topic> forum_topics = new ArrayList<Topic>();;
 	
 	
+	public Forum(){/*DEFAULT CONTRUCTOR*/}
+	
+	public Forum(String forum_name,String forum_description,java.util.Date date,Boolean forum_isPublic)
+	{
+		this.forum_name = forum_name;
+		this.forum_description = forum_description;
+		this.forum_creationDate = date;
+		this.forum_isPublic = forum_isPublic;
+		
+		this.forum_followers_number = 0;
+		this.forum_topics_number = 0;
+		this.forum_view_number = 0;
+		this.forum_comments_number = 0;
+	}
 	
 	public Long getForum_id() {
 		return forum_id;

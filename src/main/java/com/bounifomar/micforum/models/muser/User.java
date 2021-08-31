@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.bounifomar.micforum.models.mgroup.Group;
 import com.bounifomar.micforum.models.mmessage.Comment;
@@ -45,6 +46,13 @@ public class User implements Serializable {
 	private String	user_coverpic_path;
 	private String 	user_signature;
 	
+	private String user_name;
+	private String user_password;
+	
+	@Transient
+	private String user_passwordConf;
+
+	
 	private UserGender user_gender;
 	
 	private Date	user_birthdate;
@@ -60,6 +68,7 @@ public class User implements Serializable {
 	private Boolean user_isBanned;
 	private Boolean user_isDeactivated;
 	private Boolean user_isDeleted;
+	
 	
 	
 	@OneToMany
@@ -90,6 +99,18 @@ public class User implements Serializable {
 			   inverseJoinColumns = @JoinColumn(name = "rank_id")
 			  )
 	private List<UserRank> user_ranks = new ArrayList<UserRank>();
+	
+	
+	
+	public User() {}
+
+	public User(String username,String email,String password,String passwordConf)
+	{
+		this.user_name = username;
+		this.user_email = email;
+		this.user_password = password;
+		this.user_passwordConf = passwordConf;
+	}
 	
 	
 	
@@ -251,6 +272,40 @@ public class User implements Serializable {
 
 	public void setUser_isDeleted(Boolean user_isDeleted) {
 		this.user_isDeleted = user_isDeleted;
+	}
+	
+	
+
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+
+	public String getUser_password() {
+		return user_password;
+	}
+
+	public void setUser_password(String user_password) {
+		this.user_password = user_password;
+	}
+
+	public List<Group> getUser_groups() {
+		return user_groups;
+	}
+
+	public void setUser_groups(List<Group> user_groups) {
+		this.user_groups = user_groups;
+	}
+
+	public List<UserRank> getUser_ranks() {
+		return user_ranks;
+	}
+
+	public void setUser_ranks(List<UserRank> user_ranks) {
+		this.user_ranks = user_ranks;
 	}
 
 	public List<Topic> getUser_topics() {
