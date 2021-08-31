@@ -1,0 +1,132 @@
+@import url('./fonts/font.css');
+@import url('./header.css');
+
+
+#log_butt,#reg_butt
+{
+    font-size: 13px;
+}
+
+/*  BODY CSS   */
+#mic_body_container
+{
+    height: 0px;
+    flex: 1;
+}
+
+#mic_body_container_main
+{
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 100%;
+    width: 80%;
+
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+
+    background-color: rgba(255, 255, 255,.43);
+}
+
+
+#mic_main_body
+{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#mic_main_header
+{
+    margin-bottom: 20px;
+}
+
+#current_location
+{
+    margin-top: 5px;
+    margin-left: 5px;
+
+    color: rgba(112, 112, 112,.9);
+}
+
+#current_location a
+{  
+    font-family: "OpenSans-SemiBold";
+    font-size: 15px;
+    text-decoration: none;
+    color: rgba(112, 112, 112,.9);
+}
+
+#current_location a:hover
+{
+    text-decoration: underline;
+    color: rgba(112, 112, 112,1);
+}
+
+
+
+#reply_container
+{
+    flex: 1;
+    height: 250px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    border : 1px solid rgba(0, 0, 0, .1);
+
+    box-shadow: 0px 3px 6px rgba(0, 0, 0,.26);
+    background-color: rgba(255, 255, 255,1);
+}
+#repl_header
+{
+    height: 38px;
+    display: flex;
+}
+#text_operation
+{
+    padding-left: 10px;
+    padding-right: 10px;
+    align-self: center;
+}
+#reply_body
+{
+    min-height: 200px;
+    flex: 1;
+    margin-bottom: 10px;
+}
+.tox{
+    height: 100% !important;
+    border: 0px !important;
+ }
+
+#reply_footer
+{
+    align-self: center;
+}
+
+#message_send_button
+{
+    margin-bottom: 10px;
+    height: 30px;
+    width: 200px;
+
+    font-family: "OpenSans-SemiBold";
+    font-size: 14px;
+    color: rgba(247,247,247,.7);
+    border: none;
+
+    background-color: rgba(235,0,0,.76);
+    box-shadow: 0px 3px 5px rgba(126, 31, 31,.5);
+
+    outline: 0px;
+
+    cursor: pointer;
+}
+
+#message_send_button:hover
+{
+    color: rgba(247,247,247,.9);
+    border: 1px solid rgba(0, 0, 0,.2);
+}
