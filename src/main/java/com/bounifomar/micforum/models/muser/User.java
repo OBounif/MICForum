@@ -6,13 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -57,6 +58,7 @@ public class User implements Serializable {
 	
 	private Date	user_birthdate;
 	private Date	user_regdate;
+	private Date	user_lastlogon;
 	
 	private Integer user_age;
 	private Integer	user_followers_number;
@@ -71,16 +73,8 @@ public class User implements Serializable {
 	
 	
 	
-	@OneToMany
-	@JoinTable(name="T_USER_TOPIC",
-			   joinColumns = @JoinColumn(name = "user_id"),
-	           inverseJoinColumns = @JoinColumn(name = "topic_id")
-			  )	
-	private List<Topic> user_topics = new ArrayList<Topic>();
 	
-	
-	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="T_USER_GROUP",
 			   joinColumns = @JoinColumn(name = "user_id"),
 			   inverseJoinColumns = @JoinColumn(name = "group_id")
@@ -88,29 +82,36 @@ public class User implements Serializable {
 	private List<Group> user_groups = new ArrayList<Group>();
 
 	
+
+	@Transient
+	private List<Topic> user_topics = new ArrayList<Topic>();
 	
-	@OneToMany(targetEntity = Comment.class,mappedBy = "comment_user")
+	
+	@Transient
 	private List<Comment> user_comments= new ArrayList<Comment>();
 	
 	
-	@ManyToMany
-	@JoinTable(name="T_USER_RANK",
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinTable(name="T_USER_RANKS",
 			   joinColumns = @JoinColumn(name = "user_id"),
 			   inverseJoinColumns = @JoinColumn(name = "rank_id")
 			  )
-	private List<UserRank> user_ranks = new ArrayList<UserRank>();
-	
-	
+	private UserRank user_currRank;
+
 	
 	public User() {}
 
-	public User(String username,String email,String password,String passwordConf)
+	public User(String username,String email,String password,String passwordConf,Date regDate,Date lastloggon,UserRank rank)
 	{
 		this.user_name = username;
 		this.user_email = email;
 		this.user_password = password;
 		this.user_passwordConf = passwordConf;
+		this.user_regdate = regDate;
+		this.user_lastlogon =lastloggon;
+		this.user_currRank = rank;
 	}
+	
 	
 	
 	
@@ -300,13 +301,7 @@ public class User implements Serializable {
 		this.user_groups = user_groups;
 	}
 
-	public List<UserRank> getUser_ranks() {
-		return user_ranks;
-	}
-
-	public void setUser_ranks(List<UserRank> user_ranks) {
-		this.user_ranks = user_ranks;
-	}
+	
 
 	public List<Topic> getUser_topics() {
 		return user_topics;
@@ -326,6 +321,36 @@ public class User implements Serializable {
 		this.user_comments = user_comments;
 	}
 
+	
+	
+	public String getUser_passwordConf() {
+		return user_passwordConf;
+	}
+
+	public void setUser_passwordConf(String user_passwordConf) {
+		this.user_passwordConf = user_passwordConf;
+	}
+
+	public Boolean checkPassword()
+	{
+		return this.user_password.equals(this.user_passwordConf);
+	}
+
+	public Date getUser_lastlogon() {
+		return user_lastlogon;
+	}
+
+	public void setUser_lastlogon(Date user_lastlogon) {
+		this.user_lastlogon = user_lastlogon;
+	}
+
+	public UserRank getUser_currRank() {
+		return user_currRank;
+	}
+
+	public void setUser_currRank(UserRank user_currRank) {
+		this.user_currRank = user_currRank;
+	}
 	
 	
 	

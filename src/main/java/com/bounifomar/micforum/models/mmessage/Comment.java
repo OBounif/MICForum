@@ -45,8 +45,6 @@ public class Comment implements Serializable{
 	private User comment_user;
 	
 	
-	
-	
 	public Long getComment_id() {
 		return comment_id;
 	}

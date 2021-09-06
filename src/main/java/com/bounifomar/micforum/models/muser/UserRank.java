@@ -10,10 +10,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+
 
 @Entity
 @Table(name = "T_RANKS")
@@ -36,17 +36,23 @@ public class UserRank implements Serializable{
 	private Integer rank_min_message;
 	private Integer rank_max_message;
 	
-	
-	private Boolean rank_isSpecial;
 
+	private Boolean rank_isSpecial;
 	
-	@ManyToMany
-	@JoinTable(name="T_USER_RANK",
-			   joinColumns = @JoinColumn(name = "rank_id"),
-			   inverseJoinColumns = @JoinColumn(name = "user_id")
-			  )
-	private List<User> rank_users = new ArrayList<User>();
+	@Transient
+	private List<UserRank> rank_list=new ArrayList<UserRank>();
 	
+	public UserRank() {}
+	
+	
+	public UserRank(UserRankType type,String rank_img_path,Integer rank_min_message,Integer rank_max_message,Boolean isSpecial)
+	{
+		this.rank_type=type;
+		this.rank_img_path=rank_img_path;
+		this.rank_max_message=rank_max_message;
+		this.rank_min_message=rank_min_message;
+		this.rank_isSpecial = isSpecial;
+	}
 	
 	
 	public Long getRank_id() {
@@ -89,9 +95,21 @@ public class UserRank implements Serializable{
 		this.rank_max_message = rank_max_message;
 	}
 
+
+
+	public List<UserRank> getRank_list() {
+		return rank_list;
+	}
+
+	public void setRank_list(List<UserRank> rank_list) {
+		this.rank_list = rank_list;
+	}
+
+
 	public Boolean getRank_isSpecial() {
 		return rank_isSpecial;
 	}
+
 
 	public void setRank_isSpecial(Boolean rank_isSpecial) {
 		this.rank_isSpecial = rank_isSpecial;

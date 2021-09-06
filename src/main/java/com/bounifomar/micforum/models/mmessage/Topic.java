@@ -12,8 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.bounifomar.micforum.models.mforum.Forum;
 import com.bounifomar.micforum.models.muser.User;
@@ -32,12 +32,11 @@ public class Topic implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long topic_id;
 	
-	private String topic_name;
+	private String topic_title;
 	private String topic_description;
 	private String topic_logodec;
 	
 	private Date topic_creationDate;
-	
 	private Integer topic_view_number;
 	private Integer topic_comments_number;
 	
@@ -62,9 +61,32 @@ public class Topic implements Serializable {
 	private Forum topic_forum;
 	
 	
+
+	@Transient
+	private List<Topic> topic_comments = new ArrayList<Topic>();
 	
-	@OneToMany(targetEntity = Comment.class,mappedBy = "comment_topic")
-	private List<Topic> topic_comments = new ArrayList<Topic>();;
+	
+	@ManyToOne
+	@JoinColumn(name="topic_reviver")
+	private User topic_reviver;
+	
+	
+	
+	
+	private Date topic_dateOfreviv;
+	
+	
+	public Topic() {}
+	
+	
+	public Topic(String topic_title,String topic_description,String topic_logodec,Date topic_creationDate,String topic_images_paths)
+	{
+		this.topic_title = topic_title;
+		this.topic_description = topic_description;
+		this.topic_logodec = topic_logodec;
+		this.topic_creationDate = topic_creationDate;
+		this.topic_images_paths = topic_images_paths;
+	}
 	
 	
 	public Long getTopic_id() {
@@ -75,12 +97,12 @@ public class Topic implements Serializable {
 		this.topic_id = topic_id;
 	}
 
-	public String getTopic_name() {
-		return topic_name;
+	public String getTopic_title() {
+		return topic_title;
 	}
 
-	public void setTopic_name(String topic_name) {
-		this.topic_name = topic_name;
+	public void setTopic_title(String topic_title) {
+		this.topic_title = topic_title;
 	}
 
 	public String getTopic_description() {
@@ -185,6 +207,24 @@ public class Topic implements Serializable {
 
 	public void setTopic_comments(List<Topic> topic_comments) {
 		this.topic_comments = topic_comments;
+	}
+
+
+
+	public User getTopic_reviver() {
+		return topic_reviver;
+	}
+
+	public void setTopic_reviver(User topic_reviver) {
+		this.topic_reviver = topic_reviver;
+	}
+
+	public Date getTopic_dateOfreviv() {
+		return topic_dateOfreviv;
+	}
+
+	public void setTopic_dateOfreviv(Date topic_dateOfreviv) {
+		this.topic_dateOfreviv = topic_dateOfreviv;
 	}
 	
 	

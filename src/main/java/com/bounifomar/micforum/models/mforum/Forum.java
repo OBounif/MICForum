@@ -7,13 +7,15 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import com.bounifomar.micforum.models.mmessage.Comment;
 import com.bounifomar.micforum.models.mmessage.Topic;
 
 
@@ -43,15 +45,21 @@ public class Forum implements Serializable {
 	private Date forum_creationDate;
 	
 	private Boolean forum_isPublic;
-
 	
-	@OneToMany(targetEntity = Comment.class,mappedBy = "comment_topic")
+	
+	
+	@Transient
 	private List<Topic> forum_topics = new ArrayList<Topic>();;
+	
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "forum_f_id")
+	private Forum forum_f_id;
 	
 	
 	public Forum(){/*DEFAULT CONTRUCTOR*/}
 	
-	public Forum(String forum_name,String forum_description,java.util.Date date,Boolean forum_isPublic)
+	public Forum(String forum_name,String forum_description,java.util.Date date,Boolean forum_isPublic,Forum forum_f_id)
 	{
 		this.forum_name = forum_name;
 		this.forum_description = forum_description;
@@ -62,6 +70,7 @@ public class Forum implements Serializable {
 		this.forum_topics_number = 0;
 		this.forum_view_number = 0;
 		this.forum_comments_number = 0;
+		this.forum_f_id = forum_f_id;
 	}
 	
 	public Long getForum_id() {
@@ -142,6 +151,14 @@ public class Forum implements Serializable {
 
 	public void setForum_topics(List<Topic> forum_topics) {
 		this.forum_topics = forum_topics;
+	}
+
+	public Forum getForum_f_id() {
+		return forum_f_id;
+	}
+
+	public void setForum_f_id(Forum forum_f_id) {
+		this.forum_f_id = forum_f_id;
 	}
 	
 	

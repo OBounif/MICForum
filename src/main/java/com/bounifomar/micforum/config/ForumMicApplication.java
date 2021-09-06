@@ -15,7 +15,6 @@ import javax.servlet.descriptor.TaglibDescriptor;
 import org.apache.catalina.Context;
 import org.apache.tomcat.util.descriptor.web.JspPropertyGroup;
 import org.apache.tomcat.util.descriptor.web.JspPropertyGroupDescriptorImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,9 +24,8 @@ import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerF
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.bounifomar.micforum.business.blimplementations.user.AuthServiceImp;
-import com.bounifomar.micforum.models.muser.User;
-import com.bounifomar.micforum.repositories.UserDAO;
+
+
 
 
 /*
@@ -48,11 +46,6 @@ public class ForumMicApplication implements CommandLineRunner{
 	private static String JSP_PROPERTY_PAGE_ENCODING ="UTF-8";
 	private static String JSP_PROPERTY_INCLUDE_PRELUDE ="/WEB-INF/jspinclude/tags.jsp";
 	
-	@Autowired
-	private AuthServiceImp imp;
-
-	@Autowired
-	private UserDAO dao;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ForumMicApplication.class, args);
@@ -63,7 +56,8 @@ public class ForumMicApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-	
+
+		
 	}
 	
 	
