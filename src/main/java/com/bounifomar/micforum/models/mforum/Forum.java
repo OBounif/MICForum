@@ -12,7 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -32,8 +33,7 @@ public class Forum implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long forum_id;
-	
-	private String forum_name;
+	private String forum_title;
 	private String forum_description;
 	
 	private Integer forum_followers_number;
@@ -49,19 +49,32 @@ public class Forum implements Serializable {
 	
 	
 	@Transient
-	private List<Topic> forum_topics = new ArrayList<Topic>();;
+	private List<Topic> forum_topics = new ArrayList<Topic>();
 	
+	@Transient
+	private List<Forum> forum_subforums=new ArrayList<Forum>();
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "forum_f_id")
 	private Forum forum_f_id;
 	
 	
-	public Forum(){/*DEFAULT CONTRUCTOR*/}
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "forum_f_id")
+	private List<Forum> forum_childrens;
 	
-	public Forum(String forum_name,String forum_description,java.util.Date date,Boolean forum_isPublic,Forum forum_f_id)
+
+	
+	
+	public Forum(){/*DEFAULT CONTRUCTOR*/
+		this.forum_followers_number = 0;
+		this.forum_topics_number = 0;
+		this.forum_view_number = 0;
+		this.forum_comments_number = 0;
+	}
+	
+	public Forum(String forum_title,String forum_description,java.util.Date date,Boolean forum_isPublic,Forum forum_f_id)
 	{
-		this.forum_name = forum_name;
+		this.forum_title = forum_title;
 		this.forum_description = forum_description;
 		this.forum_creationDate = date;
 		this.forum_isPublic = forum_isPublic;
@@ -81,12 +94,14 @@ public class Forum implements Serializable {
 		this.forum_id = forum_id;
 	}
 
-	public String getForum_name() {
-		return forum_name;
+	
+
+	public String getForum_title() {
+		return forum_title;
 	}
 
-	public void setForum_name(String forum_name) {
-		this.forum_name = forum_name;
+	public void setForum_title(String forum_title) {
+		this.forum_title = forum_title;
 	}
 
 	public String getForum_description() {
@@ -159,6 +174,22 @@ public class Forum implements Serializable {
 
 	public void setForum_f_id(Forum forum_f_id) {
 		this.forum_f_id = forum_f_id;
+	}
+
+	public List<Forum> getForum_subforums() {
+		return forum_subforums;
+	}
+
+	public void setForum_subforums(List<Forum> forum_subforums) {
+		this.forum_subforums = forum_subforums;
+	}
+
+	public List<Forum> getForum_childrens() {
+		return forum_childrens;
+	}
+
+	public void setForum_childrens(List<Forum> forum_childrens) {
+		this.forum_childrens = forum_childrens;
 	}
 	
 	

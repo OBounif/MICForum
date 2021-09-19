@@ -1,16 +1,16 @@
 package com.bounifomar.micforum.models.mmessage;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -34,6 +34,7 @@ public class Topic implements Serializable {
 	
 	private String topic_title;
 	private String topic_description;
+	private String topic_message;
 	private String topic_logodec;
 	
 	private Date topic_creationDate;
@@ -48,15 +49,12 @@ public class Topic implements Serializable {
 	private String topic_images_paths;
 
 	
-	@ManyToOne
-	@JoinTable(name="T_USER_TOPIC",
-			   joinColumns = @JoinColumn(name = "topic_id"),
-			   inverseJoinColumns = @JoinColumn(name = "user_id")
-			  )
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name= "topic_ownerid")
 	private User topic_owner;
 	
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="topic_forumid")
 	private Forum topic_forum;
 	
@@ -66,7 +64,7 @@ public class Topic implements Serializable {
 	private List<Topic> topic_comments = new ArrayList<Topic>();
 	
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="topic_reviver")
 	private User topic_reviver;
 	
@@ -79,13 +77,15 @@ public class Topic implements Serializable {
 	public Topic() {}
 	
 	
-	public Topic(String topic_title,String topic_description,String topic_logodec,Date topic_creationDate,String topic_images_paths)
+	public Topic(String topic_title,String topic_description,String topic_logodec,Date topic_creationDate,String topic_images_paths,String topic_message)
 	{
 		this.topic_title = topic_title;
+		this.topic_message = topic_message;
 		this.topic_description = topic_description;
 		this.topic_logodec = topic_logodec;
 		this.topic_creationDate = topic_creationDate;
 		this.topic_images_paths = topic_images_paths;
+		
 	}
 	
 	
@@ -225,6 +225,16 @@ public class Topic implements Serializable {
 
 	public void setTopic_dateOfreviv(Date topic_dateOfreviv) {
 		this.topic_dateOfreviv = topic_dateOfreviv;
+	}
+
+
+	public String getTopic_message() {
+		return topic_message;
+	}
+
+
+	public void setTopic_message(String topic_message) {
+		this.topic_message = topic_message;
 	}
 	
 	

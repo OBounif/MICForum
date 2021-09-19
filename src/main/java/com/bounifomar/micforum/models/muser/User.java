@@ -1,7 +1,7 @@
 package com.bounifomar.micforum.models.muser;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +60,9 @@ public class User implements Serializable {
 	private Date	user_regdate;
 	private Date	user_lastlogon;
 	
+	@Transient
 	private Integer user_age;
+	
 	private Integer	user_followers_number;
 	private Integer user_friends_number;
 	private Integer user_topic_number;
@@ -72,7 +74,9 @@ public class User implements Serializable {
 	private Boolean user_isDeleted;
 	
 	
-	
+	private String 	user_fburl;
+	private String 	user_twitterurl;
+	private String 	user_githuburl;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="T_USER_GROUP",
@@ -350,6 +354,30 @@ public class User implements Serializable {
 
 	public void setUser_currRank(UserRank user_currRank) {
 		this.user_currRank = user_currRank;
+	}
+
+	public String getUser_fburl() {
+		return user_fburl;
+	}
+
+	public void setUser_fburl(String user_fburl) {
+		this.user_fburl = user_fburl;
+	}
+
+	public String getUser_twitterurl() {
+		return user_twitterurl;
+	}
+
+	public void setUser_twitterurl(String user_twitterurl) {
+		this.user_twitterurl = user_twitterurl;
+	}
+
+	public String getUser_githuburl() {
+		return user_githuburl;
+	}
+
+	public void setUser_githuburl(String user_githuburl) {
+		this.user_githuburl = user_githuburl;
 	}
 	
 	

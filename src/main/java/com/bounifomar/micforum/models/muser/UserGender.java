@@ -1,9 +1,8 @@
 package com.bounifomar.micforum.models.muser;
 
-enum UserGender {
+public enum UserGender {
 	
 		MALE,
-		FEMALE;
-	
-
+		FEMALE,
+		OTHER;
 }
