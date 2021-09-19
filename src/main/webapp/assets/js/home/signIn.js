@@ -4,11 +4,8 @@ $(document).ready(function(){
     const $i_check = $("<i class=\"fas fa-check-circle\"></i>");
     var $sign_status = $("#sign_in_status");
 
-    //window.location.replace("http://www.w3schools.com");
-    
-    log(1,"Password confirmation should not be empty",false);
-
-    
+  
+ 
     function log(id,str,error)
     {
         

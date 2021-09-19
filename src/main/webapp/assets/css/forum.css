@@ -94,33 +94,32 @@
 
 #forum_options div
 {
-    padding-top:1px;
     margin-right: 10px;
     text-align: center;
 }
 
-#forum_options a
+#forum_options button
 {
-    
-    font-family: "OpenSans-Regular";
-    font-size: 13px;
-    
-    text-decoration: none;
+    height: 100%;
+    width: 100%;
 
-    color: rgba(0,0,0,.7);
+    border: none;
+    background-color: rgba(235,0,0,.76);
+    color : rgba(247,247,247,.8);
+
+    cursor: pointer;
+}
+#forum_options button:hover{
+    background-color: rgba(235,0,0,.8);
+    color : rgba(247,247,247,1);
 }
 
-#forum_options a:hover
-{
-    color: rgba(247,247,247,.8);
-}
 #forum_subscribe
 {
     width: 100px;
     height: 26px;
 
     border-radius: 2px;
-    background-color: rgba(235,0,0,.76);
     box-shadow: 1px 1px 5px rgba(0,0,0,.4);
 
 }
@@ -132,7 +131,6 @@
     height:26px;
 
     border-radius: 2px;
-    background-color: rgba(235,0,0,.76);
     box-shadow: 1px 1px 10px rgba(0,0,0,.4);
 }
 
@@ -406,3 +404,44 @@
 }
 
 /**************************************/
+
+
+
+#forum_topics_main
+{
+    margin-bottom: 30px;
+}
+#forum_topics_pages
+{
+    color: rgba(0, 0, 0, .4);
+    display: flex;
+}
+#forum_topics_pages div{
+    margin-right: 10px;
+    
+}
+.page
+{
+    height: 35px;
+    width: 35px;
+
+    border: 2px solid rgba(0, 0, 0, .4);
+}
+.page_link
+{
+    padding-top: 5px;
+    text-align: center;
+    height: 100%;
+    display: block;
+
+    text-decoration: none;
+
+    color: rgba(0, 0, 0, .4);
+
+}
+
+.page:hover{
+    background-color: rgba(0, 0, 0, .2);
+    border: 1px solid rgba(0, 0, 0, .4);
+    font-size: 14px;
+}

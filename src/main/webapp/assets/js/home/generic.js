@@ -1,6 +1,6 @@
 $(document).ready(function(){
-   
-    var $forum_l = $("#forum_l");
+  
+  	var $forum_l = $("#forum_l");
     var $nav_list = $("#nav_list_main");
 
     var $message_label = $("#message_label");
@@ -45,4 +45,6 @@ $(document).ready(function(){
     $profile_pic.mouseleave(function(){
         $nav_profile.toggle();
     });
+    
+    
 });

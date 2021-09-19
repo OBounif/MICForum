@@ -1,0 +1,52 @@
+@import url('./fonts/font.css');
+@import url('./header.css');
+
+
+
+/*  MAIN BODY STYLE  */
+#forum_body_container
+{
+    flex: 1;
+    height: 0px;
+}
+
+#forum_body_container_main
+{
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 100%;
+    width: 80%;
+
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+
+}
+
+
+#img_bg,#img_bg img
+{
+    height: 500px;
+    width: 800px;
+}
+#img_bg{
+    
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    position: relative;
+}
+#img_bg img
+{
+    position: absolute;
+}
+
+#img_bg  p{
+    position: absolute;
+    align-self: center;
+    top:70%;
+
+    font-family: "OpenSans-SemiBold";
+    font-size: 19px;
+    color: rgba(0,0,0,.7);
+}

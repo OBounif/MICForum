@@ -1,0 +1,286 @@
+@import url('../fonts/font.css');
+@import url('../header.css');
+
+/*  BODY CSS   */
+#mic_body_container
+{
+   height: 0px;
+   flex:1 ;
+}
+
+#mic_body_container_main
+{
+    padding-bottom: 10px;
+    height: 100%;
+    width: 80%;
+
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+
+#current_location
+{
+    margin-top: 5px;
+    margin-left: 5px;
+
+    color: rgba(112, 112, 112,.9);
+}
+
+#current_location a
+{  
+    font-family: "OpenSans-SemiBold";
+    font-size: 15px;
+    text-decoration: none;
+    color: rgba(112, 112, 112,.9);
+}
+
+#current_location a:hover
+{
+    text-decoration: underline;
+    color: rgba(112, 112, 112,1);
+}
+
+
+
+#forum_setting_main
+{
+    margin-top: 20px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+#forum_setting_l_s
+{
+    margin-right: 30px;
+    font-size: 16px;
+    font-family: "OpenSans-Regular";
+    color : rgba(22, 21, 21, .8);
+
+    width: 200px;
+}
+
+#forum_setting_menu
+{
+    height: 100%;
+    width: 100%;
+
+}
+#forum_setting_menu_head
+{   
+
+    text-align: center;
+    height: 45px;
+    background-color: #312f2f33;
+    /*background: linear-gradient(to top, #f1f1f1 0%, #797979 200%);
+*/
+    color : rgba(247,247,247,.8);
+
+    display: flex;
+    box-shadow: 0px 1px 5px rgba(0,0,0,.37);
+    background-color: rgba(0,0,0,.77);
+}
+#forum_setting_menu_head p 
+{
+    width: 100%;
+    align-self: center;
+    text-align: center;
+}
+.forum_setting_list_item
+{
+    padding-left: 10px;
+    height: 50px;
+
+    display: flex;
+
+    border-bottom: 1px solid rgba(112, 112, 112,.3);
+
+    
+    cursor: pointer;
+}
+.forum_setting_list_item:hover,.forum_search_item:hover
+{
+    background-color: rgba(112, 112, 112,.2);
+}
+
+.forum_setting_list_item p
+{
+    align-self: center;
+}
+
+
+
+/*Right side */
+
+#forum_setting_r_s
+{
+    font-family: "OpenSans-Regular";
+    color: rgba(0,0,0,.77);
+    flex: 1;
+}
+
+#forum_add div
+{
+    margin-bottom: 15px;
+}
+.general_input
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.genera_style_inp
+{
+    
+    padding-left: 5px;
+
+    height: 30px;
+
+
+    
+    color: rgba(0,0,0,.77);
+
+
+    border-radius: 5px;
+    border:2px solid rgba(219, 219, 219,1);
+    background-color: rgba(255,255,255,1);
+
+
+    outline:0px;
+}
+
+#sub_butt,.class_butt_op
+{
+    outline: 0px;
+
+    height: 35px;
+    width: 150px;
+
+    border: none;
+    color : rgba(247,247,247,.7);
+
+
+    box-shadow: 0px 1px 5px rgba(0,0,0,.57);
+    background-color: rgba(0,0,0,.77);
+
+    align-self: center;
+
+
+    cursor: pointer;
+}
+
+#forum_description_div
+{
+    color: rgba(0,0,0,.77);
+
+    margin-bottom: 20px;
+}
+
+#forum_description
+{
+    padding-top: 5px;
+
+    width: 100%;
+    height: 100px;
+    resize: none;
+}
+
+#mod_button_div
+{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#sub_butt:hover,.class_butt_op:hover
+{
+    color: rgba(247,247,247,7);
+    background-color: rgba(0,0,0,.8);
+}
+
+#forum_radio_butt
+{
+    outline: 0px;
+}
+
+#forum_father
+{
+    width: 70%;   
+    margin-left: 10px;
+}
+
+.forum_d_item
+{
+    padding-top: 5px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+
+    display: flex;
+    justify-content: space-between;
+
+    border-bottom: 2px solid rgba(24, 31, 65,.16);
+}
+.forum_d_item_logo
+{
+    margin-right: 10px;
+    align-self: center;
+}
+.forum_d_item_logo,.forum_d_item_logo img
+{
+    
+    width: 50px;
+    height: 50px;  
+}
+
+.forum_d_item_info
+{
+    flex: 1;
+    font-family: "OpenSans-SemiBold";
+}
+
+.forum_d_item_title
+{
+   font-size: 17px;
+   text-decoration: none;
+
+   color: rgba(24, 31, 65,.86);
+}
+
+.forum_d_item_title:hover
+{
+   color: rgba(24, 31, 65,1);
+}
+
+.forum_d_item_desc
+{
+    font-size: 13px;
+    color:  rgba(0, 0, 0, .5);
+}
+
+.forum_d_item_subf
+{
+    font-size: 13px;
+    color:  rgba(0, 0, 0, .5);
+}
+
+.subf_link
+{
+    font-family: "OpenSans-Bold";
+    color:  rgba(24, 31, 65,.8);
+    text-decoration: none;
+}   
+
+.subf_link:hover
+{
+    color:  rgba(24, 31, 65,1);  
+}   
+
+
+.forum_search_item
+{
+    cursor: pointer;
+    margin-top: 20px;
+}
