@@ -5,7 +5,9 @@
         <title>FORUM | Administration</title>
         <meta charset="UTF-8"/>
         <link rel="stylesheet" href="assets/css/profile.css"/>
-
+		<c:if test = "${!empty sessionScope.USER_SESS }">
+              <link rel="stylesheet" href="<c:url value="/assets/css/stylelog.css"/>" />
+        </c:if>
         
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">

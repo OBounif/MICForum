@@ -6,6 +6,9 @@
         <title>MIC FORUM</title>
         <meta charset="UTF-8"/>
         <link rel="stylesheet" href="assets/css/staff.css"/>
+        <c:if test = "${!empty sessionScope.USER_SESS }">
+               <link rel="stylesheet" href="<c:url value="/assets/css/stylelog.css"/>" />
+        </c:if>
 
         
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">

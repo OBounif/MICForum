@@ -5,7 +5,9 @@
         <title>FORUM | Administration</title>
         <meta charset="UTF-8"/>
         <link rel="stylesheet" href="assets/css/topic.css"/>
-
+		<c:if test = "${!empty sessionScope.USER_SESS }">
+                <link rel="stylesheet" href="<c:url value="/assets/css/stylelog.css"/>" />
+        </c:if>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="assets/js/tinymce/tinymce.min.js"></script> 
 	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
