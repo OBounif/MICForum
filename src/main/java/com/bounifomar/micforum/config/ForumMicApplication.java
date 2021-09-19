@@ -28,17 +28,24 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
 
+
+
+
 /*
  * 	By default spring components scanning has no effect on entity or repository scanning-
  *  Autowiring don't work on static fields
  *  
  *  @SpringBootApplication(exclude=DispatcherServletAutoConfiguration.class) prevents spring boot from creating its own dispatcher servlet with "/" mapping	
+ *  
+ *  
+ * @Transactional it'll be ignored the method is not public also if the method invocation is inside the bean
+ * 
+ * 	
  * */
 
 @SpringBootApplication(scanBasePackages = "com.bounifomar.micforum")
 @EntityScan(basePackages = "com.bounifomar.micforum.models")
 @EnableJpaRepositories(basePackages = "com.bounifomar.micforum.repositories")
-
 
 public class ForumMicApplication implements CommandLineRunner{
 	
@@ -46,22 +53,22 @@ public class ForumMicApplication implements CommandLineRunner{
 	private static String JSP_PROPERTY_PAGE_ENCODING ="UTF-8";
 	private static String JSP_PROPERTY_INCLUDE_PRELUDE ="/WEB-INF/jspinclude/tags.jsp";
 	
-
+	
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ForumMicApplication.class, args);
 		
 	}
 	
-
+	
 
 	@Override
 	public void run(String... args) throws Exception {
-
+		
 		
 	}
 	
-	
-	
+
 	@Bean
 	public ConfigurableServletWebServerFactory cnfServlerWebFactory()
 	{
@@ -102,5 +109,6 @@ public class ForumMicApplication implements CommandLineRunner{
 			}
 		};
 	}
+	
 }
 
