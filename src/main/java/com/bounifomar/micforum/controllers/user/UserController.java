@@ -1,7 +1,9 @@
 package com.bounifomar.micforum.controllers.user;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.bounifomar.micforum.business.blexceptions.UnexpectedBehaviorException;
 import com.bounifomar.micforum.business.blinterfaces.user.IBInfChService;
@@ -35,9 +36,9 @@ public class UserController {
 	}
 
 	@PostMapping("/userSetting")
-	public String userSetting_post(HttpServletRequest request,@RequestParam(name = "user_coverpic",required = false)MultipartFile coverpic,@RequestParam(name="user_profpic",required = false)MultipartFile picprof,Model model)
+	public String userSetting_post(HttpServletRequest request,@RequestParam(name = "user_coverpic",required = false)Part coverpic,@RequestParam(name="user_profpic",required = false)Part picprof,Model model)
 	{
-			chS.modUser(request, coverpic, picprof, model);	
+			chS.modUser(request,model);	
 			return "usersetting";	
 	}
 	

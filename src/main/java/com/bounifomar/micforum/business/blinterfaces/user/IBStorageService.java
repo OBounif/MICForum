@@ -1,7 +1,8 @@
 package com.bounifomar.micforum.business.blinterfaces.user;
 
 
-import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.Part;
 
 import com.bounifomar.micforum.business.blexceptions.StorageException;
 
@@ -9,6 +10,6 @@ import com.bounifomar.micforum.business.blexceptions.StorageException;
 public interface IBStorageService {	
 		
 		
-	public String storeImage(MultipartFile file,String pref)throws StorageException;
+	public String storeImage(Part in,String pref)throws StorageException;
 
 }
