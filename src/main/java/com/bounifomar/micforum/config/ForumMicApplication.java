@@ -30,7 +30,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
 
-
 /*
  * 	By default spring components scanning has no effect on entity or repository scanning-
  *  Autowiring don't work on static fields
@@ -48,6 +47,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = "com.bounifomar.micforum.repositories")
 
 public class ForumMicApplication implements CommandLineRunner{
+	
+	
+	//private static Integer MAX_UPLOAD_SIZE = 2097152 ;
 	
 	private static String JSP_PROPERTY_URL_PATTERN = "*.jsp";
 	private static String JSP_PROPERTY_PAGE_ENCODING ="UTF-8";
@@ -69,6 +71,7 @@ public class ForumMicApplication implements CommandLineRunner{
 	}
 	
 
+	
 	@Bean
 	public ConfigurableServletWebServerFactory cnfServlerWebFactory()
 	{

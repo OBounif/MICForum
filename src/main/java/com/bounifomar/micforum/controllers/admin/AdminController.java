@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/admin")
 public class AdminController {
 	
-	private static final String SESSION_USER_ATTR = "USER_SESS";
+	//private static final String SESSION_USER_ATTR = "USER_SESS";
 
 	
 	@RequestMapping
