@@ -13,10 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.bounifomar.micforum.business.blexceptions.FormVException;
-import com.bounifomar.micforum.business.blexceptions.StorageException;
 import com.bounifomar.micforum.business.blexceptions.UnexpectedBehaviorException;
 import com.bounifomar.micforum.business.blinterfaces.user.IBInfChService;
 import com.bounifomar.micforum.business.blinterfaces.user.IBStorageService;
@@ -67,7 +65,7 @@ public class IBInfChServiceImp implements IBInfChService {
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public void modUser(HttpServletRequest request,MultipartFile coverPic,MultipartFile profPic,Model model)throws UnexpectedBehaviorException{
+	public void modUser(HttpServletRequest request,Model model)throws UnexpectedBehaviorException{
 		
 			
 				Map<String,String> errors = new HashMap<String,String>();
@@ -107,7 +105,21 @@ public class IBInfChServiceImp implements IBInfChService {
 				user_tmp.setUser_coverpic_path(user.getUser_coverpic_path());
 				user_tmp.setUser_pic_path(user.getUser_pic_path());
 			
+				
+				
+				
+				String coverpic_prefname  = getPartStream_name(request, USERCOVERPIC_PFIELD, errors);
+				String profpic_prefname = getPartStream_name(request, USERPROFPIC_PFIELD, errors);
 			
+				
+				
+				/*
+				 * It's useless to keep checking the other fields if an error occurs while parsing file part fields
+				 */
+				if(!errors.isEmpty())
+					return;
+			
+				
 				
 				this.genericProcessFields(user, USERADDRESS_PFIELD, user_address, MAX_BIGT_LENGTH, errors);
 				this.genericProcessFields(user, USERCOUNTRY_PFIELD, user_country, MAX_MEDT_LENGTH, errors);
@@ -120,61 +132,24 @@ public class IBInfChServiceImp implements IBInfChService {
 				this.processDate(user_birthdate, user, errors);
 				this.processGender(user_gender, user);
 				
-				/*Now we check for uploaded images*/
 				LocalDateTime datetime = LocalDateTime.now();
+			
 				
-				if(coverPic != null)
-				{
-					try
-					{	
-						String cover_pic_path = coverPic.getOriginalFilename();
-						System.out.println(cover_pic_path);
-						
-						String pref = "s"+user.getUser_id()+datetime.getSecond()+datetime.getMinute()+datetime.getDayOfYear()+datetime.getYear()
-										+(cover_pic_path.hashCode() & 0xfffffff);
-						
-						System.out.println(pref);
-
-						
-						String filename = storageService.storeImage(coverPic,pref);
-						user.setUser_coverpic_path(filename);
-						System.out.println(filename);
-
-					}
-					catch (StorageException e) {
-						errors.put(USERCOVERPIC_PFIELD, e.getMessage());
-					}
-				}
-					
-				if(profPic != null)
-				{
-					try
-					{	
-						String prof_pic = profPic.getOriginalFilename();
-						System.out.println(profPic);
-						
-						String pref = "x"+user.getUser_id()+datetime.getSecond()+datetime.getMinute()+datetime.getDayOfYear()+datetime.getYear()
-											+(prof_pic.hashCode() & 0xfffffff);
-						System.out.println(pref);
-
-						
-						String filename = storageService.storeImage(coverPic,pref);
-						
-						user.setUser_pic_path(filename);
-
-						System.out.println(filename);
-					}
-					catch (StorageException e) {
-						errors.put(USERPROFPIC_PFIELD, e.getMessage());
-					}
-				}
 							
 				try {
 							
 						if(errors.isEmpty())
-						{
-							userRep.save(user);	
+						{	
+							if(coverpic_prefname != null)
+								user.setUser_coverpic_path(storageService.storeImage(request.getPart(USERCOVERPIC_PFIELD), 
+									user.getUser_id()+datetime.getDayOfMonth()+datetime.getYear()+( coverpic_prefname.hashCode()& 0xfffffff)+""));
+								
+							if(profpic_prefname != null)
+								user.setUser_pic_path(storageService.storeImage(request.getPart(USERPROFPIC_PFIELD),
+										user.getUser_id()+datetime.getDayOfMonth()+datetime.getYear()+( profpic_prefname.hashCode()& 0xfffffff)+""));
 							
+							userRep.save(user);	
+
 							if(user.getUser_birthdate() != null)
 								user.setUser_age(datetime.getYear() - user.getUser_birthdate().getYear());
 							
@@ -207,6 +182,7 @@ public class IBInfChServiceImp implements IBInfChService {
 						user.setUser_githuburl(user_tmp.getUser_githuburl());
 						user.setUser_coverpic_path(user_tmp.getUser_coverpic_path());
 						user.setUser_pic_path(user_tmp.getUser_pic_path());
+						e.printStackTrace();
 					}
 			
 	}
@@ -387,5 +363,7 @@ public class IBInfChServiceImp implements IBInfChService {
 		}
 	}
 	
+
 	
+
 }

@@ -2,64 +2,70 @@ package com.bounifomar.micforum.business.blimplementations.user;
 
 
 
-import org.apache.tika.Tika;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Collection;
+
+import javax.servlet.http.Part;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.bounifomar.micforum.business.blexceptions.StorageException;
 import com.bounifomar.micforum.business.blinterfaces.user.IBStorageService;
+
+import eu.medsea.mimeutil.MimeUtil;
 
 
 @Service
 public class IBStorageServiceImp implements IBStorageService{
 	
-	private static Integer MAX_IMAGE_SIZE = 2097152;
+	private final Integer BUFFER_SIZE = 10240;
 
 	
 	@Value("${upload.path}")
-	private static String PATH ;
+	private String PATH ;
 	
 	
 	@Override
-	public String storeImage(MultipartFile file,String pref) throws StorageException{
-			
+	public String storeImage(Part in,String pref) throws StorageException{
 		
-			if(file.getSize() > MAX_IMAGE_SIZE )
-				throw new StorageException("La taille de l'image ne doit pas dépasser 2MB.");
-			
-			try
+		String filename = null;
+		BufferedOutputStream buffer_out = null;
+		BufferedInputStream buffer_in = null;
+		try
 			{
 				/*	-Mimeutil uses BufferedInputStream.
 				 * 	-BufferedInputStream doesn't hold any system resources.It simply wraps around InputStream which holds resources.
 				 *  -Closing BufferedInputStream involves closure of InputStream . 
-				 
+				 */
 					
-						BufferedInputStream buffer_in = new BufferedInputStream(file.getInputStream());
+						buffer_in = new BufferedInputStream(in.getInputStream(),BUFFER_SIZE);
 						
 						MimeUtil.registerMimeDetector("eu.medsea.mimeutil.detector.MagicMimeMimeDetector");
 						Collection<?> mimTypes = MimeUtil.getMimeTypes(buffer_in);
 						
 						String mimeTypes = mimTypes.toString();
-						System.out.println(mimeTypes);
 		
 						if(!mimeTypes.startsWith("image"))
 						{
-							throw new StorageException("Le type d'image n'est pas supporté.");
+							throw new StorageException("Format de n'est pas supportée .");
 						}
-				*/
-				
-				Tika tika = new Tika();
-				String mimeType = tika.detect(file.getInputStream());
-				System.out.println(tika.detect(file.getBytes()));
-				System.out.println(file.getContentType());
-				System.out.println(mimeType);
-				System.out.println(file.getOriginalFilename());
-
-			/*	File file_c = new File(PATH+"/"+filename);
-				file.transferTo(file_c);	
-				*/
-				return null;
+						
+						filename = pref + "."+ mimeTypes.substring(mimeTypes.indexOf("/")+1);
+						
+						buffer_out = new BufferedOutputStream(new FileOutputStream(new File(PATH + filename)),BUFFER_SIZE);
+						
+						byte buffer[] = new byte[BUFFER_SIZE];
+						int size = 0;
+						
+						 while ( ( size = buffer_in.read( buffer ) ) > 0 ) {
+							 buffer_out.write( buffer, 0, size );
+					    }
+						 System.out.print("Test +++++++++++++"+ PATH);
+						 
 			}
 			catch (Exception e) {
 				System.out.println(e);
@@ -68,8 +74,22 @@ public class IBStorageServiceImp implements IBStorageService{
 				else
 					throw new StorageException("Une erreur inattendue est survenu réessayer ultérieurement");
 			}
+		finally {
 			
+				try {
+					buffer_in.close();
+				} catch (Exception e2) {
+				}
+				
+				try {
+					buffer_out.close();
+				} catch (Exception e2) {
+				}
+		
+		}
 			
+		 return filename;
+
 	}
 	
 	
