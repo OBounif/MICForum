@@ -31,4 +31,5 @@ public interface TopicDAO extends JpaRepository<Topic, Long>{
 	public Long topicsCount(@Param("forumid")Long forum_id);
 	
 	
+	
 }

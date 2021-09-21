@@ -19,5 +19,4 @@ public interface UserDAO extends JpaRepository<User, Long>{
 	
 	@Query(value="Select u from User u where u.user_name=:username")
 	public User findUserByUsername(@Param("username")String username);
-
 }
