@@ -288,9 +288,9 @@ public class IBInfChServiceImp implements IBInfChService {
 			
 			actualBdate.setTime(user.getUser_birthdate());
 
-			if((actualBdate.get(Calendar.YEAR) == newBD.get(Calendar.YEAR))  && 
+			if((actualBdate.get(Calendar.DAY_OF_MONTH) == newBD.get(Calendar.DAY_OF_MONTH))  && 
 				(actualBdate.get(Calendar.YEAR) == newBD.get(Calendar.YEAR)) &&
-				((actualBdate.get(Calendar.MONTH) + 1) == (newBD.get(Calendar.YEAR) + 1)))	
+				((actualBdate.get(Calendar.MONTH) + 1) == (newBD.get(Calendar.MONTH) + 1)))	
 					return;
 			else
 				user.setUser_birthdate(newBD.getTime());
