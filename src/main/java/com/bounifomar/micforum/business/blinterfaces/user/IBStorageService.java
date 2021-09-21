@@ -11,5 +11,5 @@ public interface IBStorageService {
 		
 		
 	public String storeImage(Part in,String pref)throws StorageException;
-
+	
 }
