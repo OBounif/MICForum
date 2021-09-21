@@ -1,10 +1,12 @@
 package com.bounifomar.micforum.business.blimplementations.user;
 
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 
 import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +46,12 @@ public class IBAuthServiceImp implements IBAuthService{
 	
 	
 	
-
 	
+	/*
+	 * Every persistence object will be in managed state because the code below is wrapped into a transaction.So every changes on persistence objects 
+	 * will be populated the the database.
+	 */
+	@Transactional
 	@Override
 	public User signIn(HttpServletRequest request,Model model) {
 		
@@ -59,15 +65,12 @@ public class IBAuthServiceImp implements IBAuthService{
 		String password = getFieldValue(request, PASSWORD_PFIELD);
 		
 		
-		System.out.println("Password : "+password);
-		System.out.println("Username : "+username);
+	
 		
 		this.processPassword(password, user,errors);
 		this.processUsername(username, user,errors);
 
-		
-		System.out.println("Password : "+user.getUser_password());
-		System.out.println("Username : "+user.getUser_name());
+
 		
 		if(errors.isEmpty())
 		{
@@ -83,7 +86,10 @@ public class IBAuthServiceImp implements IBAuthService{
 				model.addAttribute(RESULT_ATTRIBUTE, "Username ou mot de passe incorrecte.");	
 			}
 			else
+			{
 				user = tmp;
+				user.setUser_lastlogon(new Date());
+			}
 
 		}
 		else

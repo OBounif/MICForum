@@ -7,12 +7,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.bounifomar.micforum.business.blexceptions.FormVException;
+import com.bounifomar.micforum.business.blexceptions.UnexpectedBehaviorException;
 import com.bounifomar.micforum.business.blinterfaces.user.IBSignUpService;
 import com.bounifomar.micforum.models.muser.User;
+import com.bounifomar.micforum.models.muser.UserRank;
+import com.bounifomar.micforum.models.muser.UserRankType;
 import com.bounifomar.micforum.repositories.UserDAO;
+import com.bounifomar.micforum.repositories.UserRankDAO;
+
 
 import static com.bounifomar.micforum.business.blimplementations.utility.RequestParsUtility.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,9 +51,11 @@ public class IBSignUpServiceImp implements IBSignUpService {
 	@Autowired
 	private UserDAO userRep;
 	
+	@Autowired 
+	UserRankDAO rankRep;
 
 	@Override
-	public User signUp(HttpServletRequest request,Model model) {
+	public User signUp(HttpServletRequest request,Model model)throws UnexpectedBehaviorException {
 		
 		Map<String,String> errors = new HashMap<String,String>();
 
@@ -80,20 +88,41 @@ public class IBSignUpServiceImp implements IBSignUpService {
 				
 				user.setUser_pic_path(DEFAULT_PROF_PIC_PATH);
 				user.setUser_coverpic_path(DEFAULT_COVER_PIC_PATH);
-				userRep.save(user);
+				
+				
+				UserRank rank = rankRep.findUserRankByRankType(UserRankType.NEWBIE);
+				
+				if(rank == null)
+					throw new UnexpectedBehaviorException("[SINGUP SERVICE] RANK == NULL");
+						
+				user.setUser_regdate(new Date());
+				user.setUser_lastlogon(new Date());
+				user.setUser_currRank(rank);
+				
+				try {
+					userRep.save(user);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+					model.addAttribute(RESULT_ATTRIBUTE,"Échec de la création .");
+					errors.put(RESULT_ATTRIBUTE, "Échec de la création .");
+					
+					return user;
+				}
 				
 				model.addAttribute(RESULT_ATTRIBUTE,"Votre compte a été créer avec succès .");
 			}
 			else
 			{	
-				model.addAttribute(RESULT_ATTRIBUTE,"Les mots de passe ne correspondent pas ");
-				errors.put(RESULT_ATTRIBUTE, "Les mots de passe ne correspondent pas");
+				model.addAttribute(RESULT_ATTRIBUTE,"Les mots de passe ne correspondent pas .");
+				errors.put(RESULT_ATTRIBUTE, "Les mots de passe ne correspondent pas.");
 			}
 		}
 		else
 			model.addAttribute(RESULT_ATTRIBUTE,"Échec de la création .");	
 		return user;
 	}
+	
 	
 	private void processUsername(String username,User user,Map<String,String> errors)
 	{
@@ -135,6 +164,12 @@ public class IBSignUpServiceImp implements IBSignUpService {
 					throw new FormVException("Username doit contenire au moins " + MIN_USERNAME_LENGTH+" caractères .");
 				if(username.length() > MAX_USERNAME_LENGTH )
 					throw new FormVException("Username ne doit pas dépasser " +MAX_USERNAME_LENGTH+" caractères .");
+				
+				User user = userRep.findUserByUsername(username);
+						
+				if(user!=null)
+					throw new FormVException("Username que vous avez saisie existe déja .");		
+
 			}
 			else
 				throw new FormVException("Veuillez saisire votre username .");
