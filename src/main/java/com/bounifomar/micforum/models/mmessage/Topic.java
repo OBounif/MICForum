@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,8 +33,11 @@ public class Topic implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long topic_id;
 	
+	@Column(unique = true)
 	private String topic_title;
+	
 	private String topic_description;
+	
 	private String topic_message;
 	private String topic_logodec;
 	
@@ -74,7 +78,17 @@ public class Topic implements Serializable {
 	private Date topic_dateOfreviv;
 	
 	
-	public Topic() {}
+	public Topic() {
+		
+		this.topic_isClosed = false;
+		this.topic_isDeleted = false;
+		this.topic_isPinned = false;
+		this.topic_isLocked = false;
+		
+		this.topic_view_number = 0;
+		this.topic_comments_number = 0;
+	
+	}
 	
 	
 	public Topic(String topic_title,String topic_description,String topic_logodec,Date topic_creationDate,String topic_images_paths,String topic_message)
@@ -85,6 +99,15 @@ public class Topic implements Serializable {
 		this.topic_logodec = topic_logodec;
 		this.topic_creationDate = topic_creationDate;
 		this.topic_images_paths = topic_images_paths;
+		
+		
+		this.topic_isClosed = false;
+		this.topic_isDeleted = false;
+		this.topic_isPinned = false;
+		this.topic_isLocked = false;
+		
+		this.topic_view_number = 0;
+		this.topic_comments_number = 0;
 		
 	}
 	

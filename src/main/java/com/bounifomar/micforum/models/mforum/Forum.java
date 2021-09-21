@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -33,7 +34,10 @@ public class Forum implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long forum_id;
+	
+	@Column(unique = true)
 	private String forum_title;
+	
 	private String forum_description;
 	
 	private Integer forum_followers_number;
@@ -70,6 +74,8 @@ public class Forum implements Serializable {
 		this.forum_topics_number = 0;
 		this.forum_view_number = 0;
 		this.forum_comments_number = 0;
+		
+		this.forum_isPublic = true;
 	}
 	
 	public Forum(String forum_title,String forum_description,java.util.Date date,Boolean forum_isPublic,Forum forum_f_id)

@@ -114,6 +114,15 @@ public class UserRank implements Serializable{
 	public void setRank_isSpecial(Boolean rank_isSpecial) {
 		this.rank_isSpecial = rank_isSpecial;
 	}
+
+
+	@Override
+	public String toString() {
+		return "UserRank [rank_id=" + rank_id + ", rank_type=" + rank_type + ", rank_img_path=" + rank_img_path
+				+ ", rank_min_message=" + rank_min_message + ", rank_max_message=" + rank_max_message
+				+ ", rank_isSpecial=" + rank_isSpecial + ", rank_list=" + rank_list + "]";
+	}
+	
 	
 	
 	

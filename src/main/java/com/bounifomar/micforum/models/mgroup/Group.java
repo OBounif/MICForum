@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,8 +32,9 @@ public class Group implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long group_id;
 	
-	
+	@Column(unique = true)
 	private String group_name;
+	
 	private String group_description;
 	
 	private Integer group_members_number;

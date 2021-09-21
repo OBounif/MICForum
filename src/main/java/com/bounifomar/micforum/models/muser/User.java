@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -39,7 +40,10 @@ public class User implements Serializable {
 	
 	private String 	user_fname;
 	private String 	user_lname;
+	
+	@Column(unique = true)
 	private String 	user_email;
+	
 	private String 	user_address;
 	private String  user_country;
 	private String	user_city;
@@ -47,6 +51,7 @@ public class User implements Serializable {
 	private String	user_coverpic_path;
 	private String 	user_signature;
 	
+	@Column( unique = true)
 	private String user_name;
 	private String user_password;
 	
@@ -103,8 +108,17 @@ public class User implements Serializable {
 	private UserRank user_currRank;
 
 	
-	public User() {}
-
+	public User() {
+		
+		this.user_isBanned = false;
+		this.user_isDeactivated = false;
+		this.user_isDeleted = false;
+		
+		this.user_followers_number = 0;
+		this.user_friends_number = 0;
+		this.user_topic_number = 0;
+	}
+	
 	public User(String username,String email,String password,String passwordConf,Date regDate,Date lastloggon,UserRank rank)
 	{
 		this.user_name = username;
@@ -114,7 +128,16 @@ public class User implements Serializable {
 		this.user_regdate = regDate;
 		this.user_lastlogon =lastloggon;
 		this.user_currRank = rank;
-	}
+		
+		this.user_isBanned = false;
+		this.user_isDeactivated = false;
+		this.user_isDeleted = false;
+		
+		this.user_followers_number = 0;
+		this.user_friends_number = 0;
+		this.user_topic_number = 0;
+		
+		}
 	
 	
 	
