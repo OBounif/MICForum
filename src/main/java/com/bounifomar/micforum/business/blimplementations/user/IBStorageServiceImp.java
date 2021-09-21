@@ -64,7 +64,11 @@ public class IBStorageServiceImp implements IBStorageService{
 						 while ( ( size = buffer_in.read( buffer ) ) > 0 ) {
 							 buffer_out.write( buffer, 0, size );
 					    }
-						 System.out.print("Test +++++++++++++"+ PATH);
+						 
+						 /*
+						  * 
+						  * 
+						  */
 						 
 			}
 			catch (Exception e) {
