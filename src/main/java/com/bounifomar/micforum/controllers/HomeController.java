@@ -9,10 +9,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bounifomar.micforum.business.blexceptions.UnexpectedBehaviorException;
 import com.bounifomar.micforum.business.blinterfaces.forum.IBGetService;
 import com.bounifomar.micforum.business.blinterfaces.user.IBAuthService;
 import com.bounifomar.micforum.business.blinterfaces.user.IBSignUpService;
@@ -138,6 +140,12 @@ public class HomeController {
 		}
 		
 	
+		@ResponseBody
+		@ExceptionHandler(UnexpectedBehaviorException.class)
+		public String handler(HttpServletRequest request,Exception ex)
+		{
+			return ""+ex+"\n"+request.getRequestURL();
+		}
 		
 	
 }

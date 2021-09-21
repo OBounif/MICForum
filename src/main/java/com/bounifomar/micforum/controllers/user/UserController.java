@@ -42,11 +42,13 @@ public class UserController {
 			return "usersetting";	
 	}
 	
-	
+
 	@ResponseBody
 	@ExceptionHandler(UnexpectedBehaviorException.class)
 	public String handler(HttpServletRequest request,Exception ex)
 	{
 		return ""+ex+"\n"+request.getRequestURL();
 	}
+	
+	
 }
