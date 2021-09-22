@@ -1,6 +1,8 @@
 package com.bounifomar.micforum.business.blimplementations.user;
 
 
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +58,8 @@ public class IBAuthServiceImp implements IBAuthService{
 	public User signIn(HttpServletRequest request,Model model) {
 		
 		Map<String,String> errors = new HashMap<String,String>();
-		
+		LocalDateTime datetime = LocalDateTime.now();
+
 		model.addAttribute(ERROR_ATTRIBUTE, errors);
 		
 		User user = new User();
@@ -88,6 +91,13 @@ public class IBAuthServiceImp implements IBAuthService{
 			else
 			{
 				user = tmp;
+				if(user.getUser_birthdate() != null)
+				{
+					Calendar user_bdate= Calendar.getInstance();
+					user_bdate.setTime(user.getUser_birthdate());
+					
+					user.setUser_age(datetime.getYear() - user_bdate.get(Calendar.YEAR));
+				}
 				user.setUser_lastlogon(new Date());
 			}
 

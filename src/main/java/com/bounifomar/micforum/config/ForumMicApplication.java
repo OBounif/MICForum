@@ -26,15 +26,16 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
 
+
 /*
  * 	
- * 	By default spring components scanning has no effect on entity or repository scanning-
- *  Autowiring don't work on static fields
+ * 	-By default spring components scanning has no effect on entity or repository scanning
+ *  -Autowiring don't work on static fields
  *  
- *  @SpringBootApplication(exclude=DispatcherServletAutoConfiguration.class) prevents spring boot from creating its own dispatcher servlet with "/" mapping	
+ *  -@SpringBootApplication(exclude=DispatcherServletAutoConfiguration.class) prevents spring boot from creating its own dispatcher servlet with "/" mapping	
  *  
  *  
- * 	@Transactional it'll be ignored the method is not public also if the method invocation is inside the bean
+ * 	-@Transactional it'll be ignored if the method is not public also if the method invocation is inside the bean
  * 
  * 	
  */
@@ -51,6 +52,7 @@ public class ForumMicApplication implements CommandLineRunner{
 	private static String JSP_PROPERTY_INCLUDE_PRELUDE ="/WEB-INF/jspinclude/tags.jsp";
 	
 	
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ForumMicApplication.class, args);
 		
@@ -60,7 +62,7 @@ public class ForumMicApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		/*
+	/*	
 		UserRank rank = new UserRank(UserRankType.ADMINISTRATOR,null,0,0,true);
 		UserRank rank1 = new UserRank(UserRankType.MODERATOR,null,0,0,true);
 		UserRank rank2 = new UserRank(UserRankType.FORUM_MODERATOR,null,0,0,true);
@@ -76,8 +78,8 @@ public class ForumMicApplication implements CommandLineRunner{
 		rankRep.save(rank3);
 		rankRep.save(rank4);
 		rankRep.save(rank5);
-		rankRep.save(rank5);*/
-	
+		rankRep.save(rank5);
+	*/
 
 	
 	}

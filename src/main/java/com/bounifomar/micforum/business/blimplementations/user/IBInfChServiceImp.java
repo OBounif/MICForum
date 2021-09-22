@@ -276,6 +276,7 @@ public class IBInfChServiceImp implements IBInfChService {
 		
 		try
 		{
+			LocalDateTime datetime = LocalDateTime.now();
 			Calendar actualBdate = Calendar.getInstance(),newBD=Calendar.getInstance();
 			
 			newBD.setTime(new SimpleDateFormat(DATE_FORMAT).parse(date));
@@ -293,11 +294,21 @@ public class IBInfChServiceImp implements IBInfChService {
 				((actualBdate.get(Calendar.MONTH) + 1) == (newBD.get(Calendar.MONTH) + 1)))	
 					return;
 			else
+			{
+				 Integer sub = datetime.getYear() - newBD.get(Calendar.YEAR);
+				 
+				 if(sub < 0)
+					 throw new FormVException("Date invalide .");
+				
 				user.setUser_birthdate(newBD.getTime());
-			
+			}
 		}
 		catch (ParseException e) {
 			errors.put(USERBIRTHDATE_PFIELD,"Format de la date est incorrecte.");
+		}
+		catch (FormVException e) {
+			errors.put(USERBIRTHDATE_PFIELD,e.getMessage());
+
 		}
 	}
 	

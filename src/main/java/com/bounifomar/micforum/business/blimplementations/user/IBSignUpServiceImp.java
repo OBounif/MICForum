@@ -94,14 +94,15 @@ public class IBSignUpServiceImp implements IBSignUpService {
 				
 				if(rank == null)
 					throw new UnexpectedBehaviorException("[SINGUP SERVICE] RANK == NULL");
-						
+					
+				
 				user.setUser_regdate(new Date());
 				user.setUser_lastlogon(new Date());
 				user.setUser_currRank(rank);
 				
+				
 				try {
 					userRep.save(user);
-
 				} catch (Exception e) {
 					e.printStackTrace();
 					model.addAttribute(RESULT_ATTRIBUTE,"Échec de la création .");
