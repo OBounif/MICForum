@@ -1,0 +1,21 @@
+
+	-HandlerInterceptors are used to perform actions before,after handling of a request also after a completion(when the view is rendered).It has the same concept of a filter
+		the only difference resides on where it interferes.
+		
+		
+		HandlerInterceptor interface contains three main methods :
+			-postHandle()
+			-preHandle()
+			-afterCompletion()
+			
+	The main difference between HandlerInterceptor and HandlerInterceptorAdapter is that in the first one we need override all three methods whereas in the second
+	we may implement only required method.
+	
+	-HandlerInterceptor is registered to the DefaultAnnotationHandlerMapping bean, which is responsible for applying interceptors 
+	to any class marked with a @Controller annotation. Moreover, you may specify any number of interceptors in your web application
+	
+	-HandlerInterceptorAdapter is Deprecated since spring 5.3
+	
+	
+
+	

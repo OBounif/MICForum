@@ -10,17 +10,17 @@ public enum UserRankType {
 	MEMBRE("Membre confirmé"),
 	NEWBIE("Newbie");
 	
-	private String rank_text;
+	public String rank_text;
 	
 	private UserRankType(String type)
 	{
 		this.rank_text = type;
 	}
 
-	public String getType() {
+	public String getRank_text() {
 		return rank_text;
 	}
-	
+
 	
 	
 }

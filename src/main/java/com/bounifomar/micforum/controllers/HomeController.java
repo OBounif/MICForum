@@ -29,8 +29,6 @@ public class HomeController {
 
 		private static final String SESSION_USER_ATTR = "USER_SESS";
 		private static final String MODEL_USER_ATTRIBUTE = "USER_MODEL";
-		
-		
 		private static final String ERROR_ATTRIBUTE = "ERRORS";
 		
 		@Autowired
@@ -63,17 +61,13 @@ public class HomeController {
 		@RequestMapping(path = "/signUp",method = RequestMethod.GET)
 		public String signUp(HttpSession session)
 		{
-			if(session.getAttribute(SESSION_USER_ATTR) == null)
 				return "signUp";
-			else
-				return "redirect:/home";	
 		}
 		
 		@SuppressWarnings("unchecked")
 		@RequestMapping(path = "/signUp",method = RequestMethod.POST)
 		public String signUp_P(HttpServletRequest request,Model model)
 		{			
-			
 			User user = SupS.signUp(request, model);
 			Map<String,String> map = (Map<String,String>)model.getAttribute(ERROR_ATTRIBUTE);
 			
@@ -95,12 +89,8 @@ public class HomeController {
 		
 		@RequestMapping(path = "/signIn",method = RequestMethod.GET)
 		public String signIn(HttpSession session)
-		{
-			if(session.getAttribute(SESSION_USER_ATTR) == null)
+		{	
 				return "signIn";
-			else
-				return "redirect:/home";
-			
 		}
 		
 		
@@ -127,18 +117,8 @@ public class HomeController {
 		}
 		
 		
-		@RequestMapping("/logout")
-		public String logout(HttpSession session)
-		{
-			if(session.getAttribute(SESSION_USER_ATTR) == null)
-				return "error";
-			else
-			{
-				session.invalidate();
-				return "redirect:/home";
-			}
-		}
 		
+	
 	
 		@ResponseBody
 		@ExceptionHandler(UnexpectedBehaviorException.class)

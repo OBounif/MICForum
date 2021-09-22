@@ -95,7 +95,7 @@ public class IBAuthServiceImp implements IBAuthService{
 				{
 					Calendar user_bdate= Calendar.getInstance();
 					user_bdate.setTime(user.getUser_birthdate());
-					
+
 					user.setUser_age(datetime.getYear() - user_bdate.get(Calendar.YEAR));
 				}
 				user.setUser_lastlogon(new Date());

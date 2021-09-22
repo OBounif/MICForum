@@ -107,7 +107,7 @@
                                                     <label for="user_bithdate">Date de naissance</label>
                                                     <c:choose>
                                                     	<c:when test="${!empty USER_SESS.user_birthdate}">
-                                                    	    <input id="user_bithdate" type="date"  class="genera_style_inp" value="<c:out value="${USER_SESS.user_birthdate.day}-${USER_SESS.user_birthdate.month}-${USER_SESS.user_birthdate.year}"/>" name="user_bithdate"/>
+                                                    	    <input id="user_bithdate" type="date"  class="genera_style_inp" value="<c:out value="${USER_SESS.user_birthdate.day}-${USER_SESS.user_birthdate.month}-${USER_SESS.user_birthdate.year}"/>" name="user_birthdate"/>
                                                     	</c:when>
                                                     	<c:otherwise>
                                                     	    <input id="user_bithdate" type="date"  class="genera_style_inp" value="" name="user_birthdate"/>                                        	
@@ -174,6 +174,11 @@
 								    			</p>
 										    </c:if>
 										    <c:if test="${!empty ERRORS.user_country}">
+										   		<p id="x512" >
+								    				<i class="fas fa-exclamation-circle"></i> <c:out value="${ERRORS.user_country}"/>
+								    			</p>
+										    </c:if>
+										   	<c:if test="${!empty ERRORS.user_birthdate}">
 										   		<p id="x512" >
 								    				<i class="fas fa-exclamation-circle"></i> <c:out value="${ERRORS.user_country}"/>
 								    			</p>

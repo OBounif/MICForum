@@ -63,7 +63,6 @@ public class IBInfChServiceImp implements IBInfChService {
 	private IBStorageService storageService;
 	
 	
-	@SuppressWarnings("deprecation")
 	@Override
 	public void modUser(HttpServletRequest request,Model model)throws UnexpectedBehaviorException{
 		
@@ -104,7 +103,7 @@ public class IBInfChServiceImp implements IBInfChService {
 				user_tmp.setUser_githuburl(user.getUser_githuburl());
 				user_tmp.setUser_coverpic_path(user.getUser_coverpic_path());
 				user_tmp.setUser_pic_path(user.getUser_pic_path());
-			
+				user_tmp.setUser_age(user.getUser_age());
 				
 				
 				
@@ -133,7 +132,6 @@ public class IBInfChServiceImp implements IBInfChService {
 				this.processGender(user_gender, user);
 				
 				LocalDateTime datetime = LocalDateTime.now();
-			
 				
 							
 				try {
@@ -149,10 +147,7 @@ public class IBInfChServiceImp implements IBInfChService {
 										user.getUser_id()+datetime.getDayOfMonth()+datetime.getYear()+( profpic_prefname.hashCode()& 0xfffffff)+""));
 							
 							userRep.save(user);	
-
-							if(user.getUser_birthdate() != null)
-								user.setUser_age(datetime.getYear() - user.getUser_birthdate().getYear());
-							
+		
 							model.addAttribute(RESULT_ATTRIBUTE, "Vos données ont été changer avec succès.");
 						}else
 						{
@@ -166,6 +161,8 @@ public class IBInfChServiceImp implements IBInfChService {
 							user.setUser_githuburl(user_tmp.getUser_githuburl());
 							user.setUser_coverpic_path(user_tmp.getUser_coverpic_path());
 							user.setUser_pic_path(user_tmp.getUser_pic_path());
+							user.setUser_age(user_tmp.getUser_age());
+
 						}
 			
 					}
@@ -182,6 +179,8 @@ public class IBInfChServiceImp implements IBInfChService {
 						user.setUser_githuburl(user_tmp.getUser_githuburl());
 						user.setUser_coverpic_path(user_tmp.getUser_coverpic_path());
 						user.setUser_pic_path(user_tmp.getUser_pic_path());
+						user.setUser_age(user_tmp.getUser_age());
+
 						e.printStackTrace();
 					}
 			
@@ -301,6 +300,8 @@ public class IBInfChServiceImp implements IBInfChService {
 					 throw new FormVException("Date invalide .");
 				
 				user.setUser_birthdate(newBD.getTime());
+				user.setUser_age(sub);
+				
 			}
 		}
 		catch (ParseException e) {
@@ -308,7 +309,6 @@ public class IBInfChServiceImp implements IBInfChService {
 		}
 		catch (FormVException e) {
 			errors.put(USERBIRTHDATE_PFIELD,e.getMessage());
-
 		}
 	}
 	

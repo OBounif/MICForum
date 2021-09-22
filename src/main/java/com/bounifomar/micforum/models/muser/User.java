@@ -100,7 +100,7 @@ public class User implements Serializable {
 	private List<Comment> user_comments= new ArrayList<Comment>();
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinTable(name="T_USER_RANKS",
 			   joinColumns = @JoinColumn(name = "user_id"),
 			   inverseJoinColumns = @JoinColumn(name = "rank_id")

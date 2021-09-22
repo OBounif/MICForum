@@ -23,14 +23,14 @@
 				                                        <ul>
 				                                            <li><a href="#">Profile </a></li>
 				                                            <li><a href="<c:url value="/user/userSetting" />">Paramètre</a></li>
-				                                            <li><a href="<c:url value="/logout" />">Déconnexion </a></li>
+				                                            <li><a href="<c:url value="/user/logout" />">Déconnexion </a></li>
 				                                        </ul>
 				                                    </div>
 				                                </div>
 				                                <div id="prof_text">
 				                                    <h3 id="prof_uname"><c:out value="${sessionScope.USER_SESS.user_name}"/></h3>
-				                                    <h4 id="prof_group_name">&lt;&lt;<c:out value="${sessionScope.USER_SESS.user_currRank.rank_text}"/> &gt;&gt;</h4>
-				                                    <p id="prof_last_log">Last Login : <c:out value="${sessionScope.USER_SESS.user_currRank.lastlogon}"/> </p>
+				                                    <h4 id="prof_group_name">&lt;&lt;<c:out value="${sessionScope.USER_SESS.user_currRank.rank_type.rank_text}"/> &gt;&gt;</h4>
+				                                    <p id="prof_last_log">Dernière visite : ${sessionScope.USER_SESS.user_lastlogon.} </p>
 				                                </div>
 	                           		   </div>
 			                           <div id="prof_lower_side">

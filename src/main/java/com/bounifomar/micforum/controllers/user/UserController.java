@@ -42,6 +42,13 @@ public class UserController {
 			return "usersetting";	
 	}
 	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session)
+	{
+		session.invalidate();
+		return "redirect:/home";
+	}
+	
 
 	@ResponseBody
 	@ExceptionHandler(UnexpectedBehaviorException.class)
@@ -49,6 +56,7 @@ public class UserController {
 	{
 		return ""+ex+"\n"+request.getRequestURL();
 	}
+	
 	
 	
 }

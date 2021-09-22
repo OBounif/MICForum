@@ -3,7 +3,7 @@
 
 
 -When you are writing a @Repository bean, you would normally inject there a DataSource or an EntityManager. 
-DataSource.getConnection() method should be thread safe. With regard to EntityManager, Spring will inject a proxy which will behave differently for different threads,
-i.e. different threads won't share the same JPA session.
+ DataSource.getConnection() method should be thread safe. With regard to EntityManager, Spring will inject a proxy which will behave differently for different threads,
+	i.e. different threads won't share the same JPA session.
 
 
