@@ -313,6 +313,36 @@ $(document).ready(function(){
         generic_func_under($(this),"Ancien mot de pass",128,MIN_PASS_LENGTH);
     });
     
+     $new_pass_conf_input.change(function(){
+        generic_func_under($(this),"Champ de confirmation",128,MIN_PASS_LENGTH);
+        
+        if( ( status & 128 ) || $new_pass_input.val() == '')
+            return;
+
+        if($(this).val() != $new_pass_input.val())
+        {
+            status |= 128;
+            $(this).css({
+                borderColor : "rgba(247, 30, 52, 0.5)"
+            })
+            log(128,"Les mots de passe ne correspondent pas",true);
+        }
+        else{
+            if(status & 128)
+            {
+                status &= ~128;
+               
+            } 
+            $(this).css({
+                    borderColor : "rgba(6, 133, 17, 0.3)"
+                })
+                
+            $block_status.children("#x"+128).remove();
+            refreshStatus()
+        }
+    });
+    
+    
     $butt_passw_sub.click(function(e){
         e.preventDefault();
         if(status)
@@ -322,10 +352,10 @@ $(document).ready(function(){
             log(32,"Ancien mot de passe ne peut pas être vide.",true);
 
         if($new_pass_input.val().length == 0)
-            log(64,"Ancien mot de passe ne peut pas être vide.",true);
+            log(64,"Nouveau mot de passe ne peut pas être vide.",true);
 
         if($new_pass_conf_input.val().length == 0)
-            log(128,"Ancien mot de passe ne peut pas être vide.",true);
+            log(128,"Champ de confirmation ne peut pas être vide.",true);
 
         
         if($block_status.find("p").length > 0)
