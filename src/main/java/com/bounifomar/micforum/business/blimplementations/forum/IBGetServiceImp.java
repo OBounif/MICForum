@@ -70,7 +70,7 @@ public class IBGetServiceImp implements IBGetService{
 	}
 
 	@Override
-	public Boolean getForum(Model model) {
+	public Boolean getForumMIC(Model model) {
 		
 		List<Forum> forums = null;
 		List<Topic> topics = null;
@@ -89,6 +89,25 @@ public class IBGetServiceImp implements IBGetService{
 		}
 
 		return true;
+	}
+
+	@Override
+	public void getAllForums(String string_like,Model model) {
+		
+		List<Forum> forums = null;
+
+		try
+		{
+			forums = forumRep.findByIdEqualsNull();
+			
+			if(forums == null)
+				return;
+			
+			model.addAttribute(FORUM_ATTRIBUTE,forums);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	

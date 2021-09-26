@@ -11,7 +11,8 @@ public interface IBGetService {
 		
 		public Boolean getForum(String page_number,String page,Model model);
 		
-		public Boolean getForum(Model model);
+		public Boolean getForumMIC(Model model);
 		
+		public void getAllForums(String string_like,Model model);
 	
 }
