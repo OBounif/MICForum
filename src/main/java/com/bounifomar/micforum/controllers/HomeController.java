@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bounifomar.micforum.business.blexceptions.UnexpectedBehaviorException;
@@ -26,6 +29,7 @@ import com.bounifomar.micforum.models.muser.User;
 
 
 public class HomeController {
+		private static final String SESSION_ADMIN_LOGGED = "USER_ADMIN_SESS";
 
 		private static final String SESSION_USER_ATTR = "USER_SESS";
 		private static final String MODEL_USER_ATTRIBUTE = "USER_MODEL";
@@ -52,7 +56,7 @@ public class HomeController {
 		@RequestMapping(path = {"/","/home"})
 		public String home(Model model)
 		{
-			if(getS.getForum(model))
+			if(getS.getForumMIC(model))
 				return "home";
 			else
 				return "error";
@@ -100,8 +104,7 @@ public class HomeController {
 		{
 				User user = authS.signIn(request, model);
 				Map<String,String> map = (Map<String,String>)model.getAttribute(ERROR_ATTRIBUTE);
-				
-			
+					
 				if(map.isEmpty())
 				{
 					HttpSession session = request.getSession();	
@@ -117,7 +120,25 @@ public class HomeController {
 		}
 		
 		
+		@GetMapping("/checkAdmin")
+		public String checkAdmin()
+		{	
+			return "checkAdmin";
+		}
 		
+		@PostMapping("/checkAdmin")
+		public String checkAdmin_p(HttpSession session,@RequestParam("password_conf")String password,Model model)
+		{
+			User user = (User) session.getAttribute(SESSION_USER_ATTR);
+			
+			if(authS.checkAdmin(password, user, model))
+			{
+				session.setAttribute(SESSION_ADMIN_LOGGED, true);
+				return "redirect:/admin";
+			}
+			else
+				return "checkAdmin";
+		}
 	
 	
 		@ResponseBody
