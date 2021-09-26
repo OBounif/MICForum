@@ -1,5 +1,8 @@
+ <%@ page pageEncoding="UTF-8" %>
+ 
+ 
  <header id="forum_header_container">
-                <div id="forum_header_container_main">              
+            <div id="forum_header_container_main">              
                     <div id="f_h_c_leftSide">
                         <div id="f_h_c_leftSide_main">
                            
@@ -16,21 +19,25 @@
 	                            </c:when>
 	                            
 	                            <c:otherwise>
+	                            			<jsp:useBean id="user_date" class="com.bounifomar.micforum.models.date.DateP" />
+											<jsp:setProperty name="user_date" property="date" value="${sessionScope.USER_SESS.user_lastlogon}" />
+		                               
+		                               
 		                               <div id="prof_upper_side">
 				                                <div id="prof_image">
 				                                    <img src="<c:url value="/static/p_i/${sessionScope.USER_SESS.user_pic_path}"/>"/>
 				                                    <div id="prof_list" >
 				                                        <ul>
 				                                            <li><a href="#">Profile </a></li>
-				                                            <li><a href="<c:url value="/user/userSetting" />">Paramètre</a></li>
-				                                            <li><a href="<c:url value="/user/logout" />">Déconnexion </a></li>
+				                                            <li><a href="<c:url value="/user/userSetting" />">ParamÃ¨tre</a></li>
+				                                            <li><a href="<c:url value="/user/logout" />">DÃ©connexion </a></li>
 				                                        </ul>
 				                                    </div>
 				                                </div>
 				                                <div id="prof_text">
 				                                    <h3 id="prof_uname"><c:out value="${sessionScope.USER_SESS.user_name}"/></h3>
 				                                    <h4 id="prof_group_name">&lt;&lt;<c:out value="${sessionScope.USER_SESS.user_currRank.rank_type.rank_text}"/> &gt;&gt;</h4>
-				                                    <p id="prof_last_log">Dernière visite : ${sessionScope.USER_SESS.user_lastlogon.} </p>
+				                                    <p id="prof_last_log">DerniÃ¨re visite : ${user_date.day } /  ${user_date.month} / ${user_date.year}</p>
 				                                </div>
 	                           		   </div>
 			                           <div id="prof_lower_side">
@@ -88,7 +95,7 @@
 			                                    </i>
 			                                </div>
 			                                <div id="p_l_s_r">
-			                                    <a href="<c:url value="/logout"/>">
+			                                    <a href="<c:url value="/user/logout"/>">
 			                                    	<i class="fas fa-sign-out-alt"></i>
 			                                    </a>
 			                                </div>

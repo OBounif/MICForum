@@ -8,6 +8,8 @@
         <c:if test = "${!empty sessionScope.USER_SESS }">
                 <link rel="stylesheet" href="<c:url value="/assets/css/stylelog.css"/>" />
         </c:if>
+        
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>

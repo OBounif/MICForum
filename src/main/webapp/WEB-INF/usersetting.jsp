@@ -1,5 +1,6 @@
 <c:if test="${!empty requestScope.ERRORS}" var="error"/>
-
+<jsp:useBean id="user_date" class="com.bounifomar.micforum.models.date.DateP" />
+<jsp:setProperty name="user_date" property="date" value="${sessionScope.USER_SESS.user_birthdate}" />
 <!DOCTYPE html>
 <html> 
 <head>
@@ -22,7 +23,7 @@
                 <header>
                     <p id="current_location">
                         <i class="fas fa-home" style="font-size: 15px;color: rgba(0,0,0,.7);"></i> 
-                    /<a href="<c:url value="/home"/>">home</a>/<a href="<c:url value="/users/${USER_SESS.user_name}"/>">user</a>/<a href="#">setting</a>
+                    /<a href="<c:url value="/home"/>">home</a>/<a href="<c:url value="/users/${USER_SESS.user_name}"/>"> <c:out value="${USER_SESS.user_name}"/> </a>/<a href="#">setting</a>
                     </p>
                 </header>
                 <div id="user_setting_main" >
@@ -32,7 +33,7 @@
                                   <p>Paramètres</p>
                             </li>
 
-                            <li id="general_inf" class="user_setting_list_item selected" >
+                            <li id="general_inf" class="user_setting_list_item selected selected" >
                                     <p>Information Géneral</p>                           
                             </li>
                             
@@ -44,7 +45,7 @@
                      </div>
                      <div id="user_setting_r_s" >
                            <div id="container">
-                                <form id="passwd_ch" action="" method="post" style="display: none;">
+                                <form id="passwd_ch" action="<c:url value="/user/change_password"/>" method="post" style="display: none;">
                                     <div id="" class="general_input">
                                         <label for="user_oldpass">Ancien mot de passe</label>
                                         <input id="user_oldpass" type="password" class="genera_style_inp" name="user_oldpass"/>
@@ -61,7 +62,7 @@
                                         <input id="butt_passw_sub" class="sub_butt" type="submit"/>
                                     </div>
                                 </form>
-                                <form id="general_info_ch" method="post" action="#" enctype="multipart/form-data">
+                                <form id="general_info_ch" method="post" action="<c:url value="/user/userSetting"/>" enctype="multipart/form-data">
                                     <div id="user_pics">
                                         <div id="user_cover_pic_in">
                                             <img id="img_cover_pic" src="<c:url value="/static/p_i/${USER_SESS.user_coverpic_path}"/>"/><br/>
@@ -107,7 +108,7 @@
                                                     <label for="user_bithdate">Date de naissance</label>
                                                     <c:choose>
                                                     	<c:when test="${!empty USER_SESS.user_birthdate}">
-                                                    	    <input id="user_bithdate" type="date"  class="genera_style_inp" value="<c:out value="${USER_SESS.user_birthdate.day}-${USER_SESS.user_birthdate.month}-${USER_SESS.user_birthdate.year}"/>" name="user_birthdate"/>
+                                                    	    <input id="user_bithdate" type="date"  class="genera_style_inp" value="${user_date.year}-${user_date.month}-${user_date.day}" name="user_birthdate"/>
                                                     	</c:when>
                                                     	<c:otherwise>
                                                     	    <input id="user_bithdate" type="date"  class="genera_style_inp" value="" name="user_birthdate"/>                                        	
@@ -206,6 +207,21 @@
 										    <c:if test="${!empty ERRORS.user_githuburl}">
 										   		<p id="x128" >
 								    				<i class="fas fa-exclamation-circle"></i> <c:out value="${ERRORS.user_githuburl}"/>
+								    			</p>
+										    </c:if>
+										    <c:if test="${!empty ERRORS.user_oldpass}">
+										   		<p id="x32" >
+								    				<i class="fas fa-exclamation-circle"></i> <c:out value="${ERRORS.user_oldpass}"/>
+								    			</p>
+										    </c:if>
+										      <c:if test="${!empty ERRORS.user_newpass}">
+										   		<p id="x64" >
+								    				<i class="fas fa-exclamation-circle"></i> <c:out value="${ERRORS.user_newpass}"/>
+								    			</p>
+										    </c:if>
+										      <c:if test="${!empty ERRORS.user_newpassconf}">
+										   		<p id="x128" >
+								    				<i class="fas fa-exclamation-circle"></i> <c:out value="${ERRORS.user_newpassconf}"/>
 								    			</p>
 										    </c:if>
 									 </div>
