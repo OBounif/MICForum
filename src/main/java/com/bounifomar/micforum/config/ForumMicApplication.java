@@ -27,6 +27,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
 
+
 /*
  * 	
  * 	-By default spring components scanning has no effect on entity or repository scanning
@@ -48,11 +49,10 @@ public class ForumMicApplication implements CommandLineRunner{
 
 	
 	private static String JSP_PROPERTY_URL_PATTERN = "*.jsp";
-	private static String JSP_PROPERTY_PAGE_ENCODING ="UTF-8";
+	private static String JSP_PROPERTY_PAGE_ENCODING ="utf-8";
 	private static String JSP_PROPERTY_INCLUDE_PRELUDE ="/WEB-INF/jspinclude/tags.jsp";
 	
-	
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(ForumMicApplication.class, args);
 		
@@ -79,8 +79,7 @@ public class ForumMicApplication implements CommandLineRunner{
 		rankRep.save(rank4);
 		rankRep.save(rank5);
 		rankRep.save(rank5);
-	*/
-
+	*/	
 	
 	}
 	
@@ -106,9 +105,11 @@ public class ForumMicApplication implements CommandLineRunner{
 						
 						JspPropertyGroup prop = new JspPropertyGroup();
 						prop.addUrlPattern(JSP_PROPERTY_URL_PATTERN);
+						
+						//The encoding somehow doesn't apply to the header jsp
 						prop.setPageEncoding(JSP_PROPERTY_PAGE_ENCODING);
+						
 						prop.addIncludePrelude(JSP_PROPERTY_INCLUDE_PRELUDE);	
-						prop.setDefaultContentType("text/html");
 						
 						JspPropertyGroupDescriptor ijsp=new JspPropertyGroupDescriptorImpl(prop);
 						collection.add(ijsp);
