@@ -18,4 +18,8 @@ public interface ForumDAO extends JpaRepository<Forum, Long>{
 	@Query("select f from Forum f where f.forum_f_id is null")
 	List<Forum> findByIdEqualsNull();
 	
+	@Query("select f from  Forum f where f.forum_title like :stringlike")
+	List<Forum> findByLikeKey(@Param("stringlike")String stringlike);
+	
+	
 }
