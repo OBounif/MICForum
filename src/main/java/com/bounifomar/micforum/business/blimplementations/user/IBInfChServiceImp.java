@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -28,6 +29,8 @@ import static com.bounifomar.micforum.business.blimplementations.utility.Request
 @Service
 public class IBInfChServiceImp implements IBInfChService {
 	
+	private static String ENCRYPTION_ALGORITHM = "SHA-256";
+
 	private static final String SESSION_USER_ATTR = "USER_SESS";
 
 	private static final String ERROR_ATTRIBUTE = "ERRORS";
@@ -35,6 +38,8 @@ public class IBInfChServiceImp implements IBInfChService {
 	
 	private static final Integer MAX_BIGT_LENGTH = 255;
 	private static final Integer MAX_MEDT_LENGTH = 30;
+
+	private static final Integer MIN_MEDT_LENGTH = 6;
 
 
 	private static final String USERCOVERPIC_PFIELD = "user_coverpic";
@@ -51,6 +56,12 @@ public class IBInfChServiceImp implements IBInfChService {
 	private static final String USERFBURL_PFIELD = "user_facebook";
 	private static final String USERFGITURL_PFIELD = "user_github";
 	private static final String USERTWITTERURL_PFIELD = "user_twitter";
+
+	
+	
+	private static final String USER_OLD_PASSWORD = "user_oldpass";
+	private static final String USER_NEW_PASSWORD = "user_newpass";
+	private static final String USER_NEW_CONF_PASSWORD = "user_newpassconf";
 
 	
 	private static final String DATE_FORMAT = "yyyy-MM-dd";
@@ -305,7 +316,7 @@ public class IBInfChServiceImp implements IBInfChService {
 			}
 		}
 		catch (ParseException e) {
-			errors.put(USERBIRTHDATE_PFIELD,"Format de la date est incorrecte.");
+			errors.put(USERBIRTHDATE_PFIELD,"Format de la date est incorrect.");
 		}
 		catch (FormVException e) {
 			errors.put(USERBIRTHDATE_PFIELD,e.getMessage());
@@ -374,7 +385,111 @@ public class IBInfChServiceImp implements IBInfChService {
 		}
 	}
 	
+	
+	
+	
+	@Override
+	public void modPass(User user,String oldpassword,String newpassword,String newpasswordConf,Model model)throws UnexpectedBehaviorException {
+		
 
+		Map<String,String> errors = new HashMap<String,String>();
+		
+		model.addAttribute(ERROR_ATTRIBUTE, errors);
+		
+		if(user == null)
+			throw new UnexpectedBehaviorException("[MOD PASS SERVICE] User == null");
+		
+		String oldpassword_s =  (oldpassword == null || oldpassword.trim().isEmpty() ) ? null : oldpassword.trim();
+		String newpassword_s =  (newpassword == null || newpassword.trim().isEmpty() ) ? null : newpassword.trim();
+		String newpasswordConf_s =  (newpasswordConf == null || newpasswordConf.trim().isEmpty() ) ? null : newpasswordConf.trim();
+		
+		String tmp_pass = user.getUser_password();
+		
+		this.processPasswords(oldpassword_s, USER_OLD_PASSWORD, errors);
+		this.processPasswords(newpassword_s, USER_NEW_PASSWORD, errors);
+		this.processPasswords(newpasswordConf_s, USER_NEW_CONF_PASSWORD, errors);
+
+
+		if(errors.isEmpty()) {
+			if(!newpasswordConf.equals(newpassword_s))
+			{
+				errors.put(USER_NEW_CONF_PASSWORD, "Les mots de passe ne correspondent pas.");
+				return;
+			}
+			
+			ConfigurablePasswordEncryptor passwordEncry = new ConfigurablePasswordEncryptor();
+			passwordEncry.setAlgorithm(ENCRYPTION_ALGORITHM);
+			passwordEncry.setPlainDigest(false);
+			
+			
+			if(!passwordEncry.checkPassword(oldpassword_s, user.getUser_password()))
+			{
+				errors.put(USER_OLD_PASSWORD, "L'ancien mot de passe est incorrect.");
+				return;
+			}
+			else
+			{
+				user.setUser_password(passwordEncry.encryptPassword(newpassword_s));
+				try 
+				{
+					userRep.save(user);
+				}
+				catch (Exception e) {
+					user.setUser_password(tmp_pass);
+				}
+			}
+			
+		}
+	}
+	
+	private void processPasswords(String password,String field,Map<String,String> errors)
+	{
+		try
+		{
+			this.checkPassword(password, field);
+		}
+		catch (FormVException e) {
+			errors.put(field, e.getMessage());
+		}
+	}
+	
+	private void checkPassword(String password,String field)throws FormVException
+	{
+		if(password!= null)
+		{
+			if(password.length() > MAX_MEDT_LENGTH)
+				switch (field) {
+				case USER_OLD_PASSWORD:
+					throw new FormVException("Votre ancien mot de passe ne doit pas dépasser "+MAX_MEDT_LENGTH+" caractères.");
+				case USER_NEW_PASSWORD:
+					throw new FormVException("Votre nouveau mot de passe ne doit pas dépasser "+MAX_MEDT_LENGTH+" caractères.");
+				case USER_NEW_CONF_PASSWORD:
+					throw new FormVException("Champ de confirmation ne doit pas dépasser "+MAX_MEDT_LENGTH+" caractères.");
+				}
+			
+			
+			if(password.length() < MIN_MEDT_LENGTH)
+				switch (field) {
+				case USER_OLD_PASSWORD:
+					throw new FormVException("Votre ancien mot de passe doit contenire au minimum "+MAX_MEDT_LENGTH+" caractères.");
+				case USER_NEW_PASSWORD:
+					throw new FormVException("Votre nouveau mot de passe doit contenire au minimum "+MAX_MEDT_LENGTH+" caractères.");
+				case USER_NEW_CONF_PASSWORD:
+					throw new FormVException("Champ de confirmation doit contenire au minimum "+MAX_MEDT_LENGTH+" caractères.");
+				}
+		}
+		else
+		{
+			switch (field) {
+			case USER_OLD_PASSWORD:
+				throw new FormVException("Veuillez sasire votre ancien mot de passe.");
+			case USER_NEW_PASSWORD:
+				throw new FormVException("Veuillez sasire votre nouveau mot de passe.");
+			case USER_NEW_CONF_PASSWORD:
+				throw new FormVException("Veuillez confirmer votre nouveau mot de passe.");
+			}
+		}
+	}
 	
 
 }
