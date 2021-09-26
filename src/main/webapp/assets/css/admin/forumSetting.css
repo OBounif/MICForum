@@ -106,6 +106,11 @@
     background-color: rgba(112, 112, 112,.2);
 }
 
+.selected
+{
+    background-color: rgba(112, 112, 112,.2);
+}
+
 .forum_setting_list_item p
 {
     align-self: center;
@@ -152,7 +157,7 @@
     outline:0px;
 }
 
-#sub_butt,.class_butt_op
+.sub_butt,.class_butt_op
 {
     outline: 0px;
 
@@ -188,14 +193,15 @@
     resize: none;
 }
 
-#mod_button_div
+.mod_button_div
 {
     margin-top: 10px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
 }
 
-#sub_butt:hover,.class_butt_op:hover
+.sub_butt:hover,.class_butt_op:hover
 {
     color: rgba(247,247,247,7);
     background-color: rgba(0,0,0,.8);
@@ -284,3 +290,26 @@
     cursor: pointer;
     margin-top: 20px;
 }
+
+
+#block_status
+{
+    padding: 10px;
+    border-radius: 7px;
+    word-break: break-all;
+    font-family: "OpenSans-Regular";
+    color: rgba(0, 0, 0, .7);
+}
+#block_status i{
+    margin-right: 5px;
+}
+
+.success
+{
+    background-color: rgba(6, 133, 17, 0.3);
+}
+.error
+{
+    background-color: rgba(247, 30, 52, 0.5);
+}
+

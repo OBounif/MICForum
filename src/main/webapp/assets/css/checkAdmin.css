@@ -1,0 +1,153 @@
+@import url('./fonts/font.css');
+@import url('./header.css');
+
+
+
+/*  MAIN BODY STYLE  */
+#forum_body_container
+{
+    flex: 1;
+}
+
+#forum_body_container_main
+{
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 100%;
+    width: 80%;
+
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+
+  
+}
+
+#forum_main_header
+{
+    margin-bottom: 20px;
+    height: 90px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+   
+}
+
+#current_location
+{
+    margin-top: 5px;
+    margin-left: 5px;
+
+    color: rgba(112, 112, 112,.9);
+}
+
+#current_location a
+{  
+    font-family: "OpenSans-SemiBold";
+    font-size: 15px;
+    text-decoration: none;
+    color: rgba(112, 112, 112,.9);
+}
+
+#current_location a:hover
+{
+    text-decoration: underline;
+    color: rgba(112, 112, 112,.9);
+}
+
+#forum_page_title
+{
+    font-size: 25px;
+    color :rgba(24, 31, 65,1);
+    text-shadow: 1px 1px 5px rgba(24, 31, 65,.2);
+    
+}
+
+
+.genera_style_inp
+{
+    
+    padding-left: 5px;
+
+    height: 30px;
+
+
+    
+    color: rgba(0,0,0,.77);
+
+
+    border-radius: 5px;
+    border:2px solid rgba(219, 219, 219,1);
+    background-color: rgba(255,255,255,1);
+
+
+    outline:0px;
+}
+
+#form_passw_check
+{
+    align-self: center;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+#form_passw_check label {
+    font-size: 20px;
+    color: rgb(10, 25, 49);
+    text-shadow: 1px 1px 5px rgba(24, 31, 65,.2);
+
+}
+
+.sub_butt
+{
+    outline: 0px;
+
+    height: 35px;
+    width: 150px;
+
+    border: none;
+    border-radius: 5px;
+    color : rgba(247,247,247,.7);
+
+    font-family: "OpenSans-Regular";
+    box-shadow: 0px 1px 5px rgba(0,0,0,.1);
+    background-color: rgb(10, 25, 49);
+
+    align-self: center;
+
+
+    cursor: pointer;
+}
+.sub_butt:hover{
+    color : rgba(247,247,247,1);
+    box-shadow: 0px 1px 5px rgba(0,0,0,.6);
+
+}
+
+#block_status
+{
+    padding: 10px;
+    border-radius: 7px;
+    word-break: break-all;
+    font-family: "OpenSans-Regular";
+    color: rgba(0, 0, 0, .7);
+}
+#block_status i{
+    margin-right: 5px;
+}
+
+.success
+{
+    background-color: rgba(6, 133, 17, 0.3);
+}
+.error
+{
+    background-color: rgba(247, 30, 52, 0.5);
+}
+
