@@ -10,4 +10,8 @@ import com.bounifomar.micforum.models.muser.User;
 public interface IBAuthService {
 	
 	public User signIn(HttpServletRequest request,Model model);
+	
+	public Boolean checkAdmin(String password_conf,User user,Model model);
+	
+	
 }

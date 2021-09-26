@@ -32,6 +32,8 @@ public class IBAuthServiceImp implements IBAuthService{
 	private static String ERROR_ATTRIBUTE = "ERRORS";
 	private static String RESULT_ATTRIBUTE = "RESULT";
 
+	private static final String PASSWORD_CONF_PFIELD = "password_conf";
+
 	
 	private static final String USERNAME_PFIELD = "username";
 	private static final String PASSWORD_PFIELD = "password";
@@ -81,26 +83,32 @@ public class IBAuthServiceImp implements IBAuthService{
 			passwordEncry.setAlgorithm(ENCRYPTION_ALGORITHM);
 			passwordEncry.setPlainDigest(false);
 			
-			User tmp = userRep.findUserByUsername(username);
-			
-			if( tmp == null || !passwordEncry.checkPassword(password, tmp.getUser_password()))
+			try
 			{
-				errors.put(RESULT_ATTRIBUTE, "x");
-				model.addAttribute(RESULT_ATTRIBUTE, "Username ou mot de passe incorrecte.");	
-			}
-			else
-			{
-				user = tmp;
-				if(user.getUser_birthdate() != null)
+				User tmp = userRep.findUserByUsername(username);
+				
+				if( tmp == null || !passwordEncry.checkPassword(password, tmp.getUser_password()))
 				{
-					Calendar user_bdate= Calendar.getInstance();
-					user_bdate.setTime(user.getUser_birthdate());
-
-					user.setUser_age(datetime.getYear() - user_bdate.get(Calendar.YEAR));
+					errors.put(RESULT_ATTRIBUTE, "x");
+					model.addAttribute(RESULT_ATTRIBUTE, "Username ou mot de passe incorrect.");	
 				}
-				user.setUser_lastlogon(new Date());
+				else
+				{
+					user = tmp;
+					if(user.getUser_birthdate() != null)
+					{
+						Calendar user_bdate= Calendar.getInstance();
+						user_bdate.setTime(user.getUser_birthdate());
+	
+						user.setUser_age(datetime.getYear() - user_bdate.get(Calendar.YEAR));
+					}
+					user.setUser_lastlogon(new Date());
+				}
 			}
-
+			catch (Exception e) {	
+				errors.put(RESULT_ATTRIBUTE, "x");
+				model.addAttribute(RESULT_ATTRIBUTE, "Une erreur inattendue est survenu réessayer ultérieurement");	
+			}
 		}
 		else
 			model.addAttribute(RESULT_ATTRIBUTE, "Échec de la connexion.");
@@ -162,6 +170,46 @@ public class IBAuthServiceImp implements IBAuthService{
 		}
 		else
 			throw new FormVException("Veuillez saisire votre Mot de passe .");
+	}
+
+	@Override
+	public Boolean checkAdmin(String password_conf,User user,Model model) {
+		
+		Map<String,String> errors = new HashMap<String,String>();
+		model.addAttribute(ERROR_ATTRIBUTE, errors);
+
+		
+		String pass_conf = (password_conf == null || password_conf.trim().isEmpty() ) ? null : password_conf.trim();
+			
+		if(pass_conf == null)
+		{
+			errors.put(PASSWORD_CONF_PFIELD, "Veuillez saisire le mot de passe de confirmation.");
+			return false;
+		}
+		
+		if(pass_conf.length() > MAX_PASSWORD_LENGTH)
+		{
+			errors.put(PASSWORD_CONF_PFIELD, "Mot de passe ne doit pas dépasser " +MAX_PASSWORD_LENGTH+" caractères .");
+			return false;
+		}
+		
+		if(pass_conf.length() < MIN_PASSWORD_LENGTH)
+		{
+			errors.put(PASSWORD_CONF_PFIELD, "Mot de passe doit contenire au moins " + MIN_PASSWORD_LENGTH+" caractères .");
+			return false;
+		}
+		
+		ConfigurablePasswordEncryptor passwordEncry = new ConfigurablePasswordEncryptor();
+		passwordEncry.setAlgorithm(ENCRYPTION_ALGORITHM);
+		passwordEncry.setPlainDigest(false);
+		
+		if(!passwordEncry.checkPassword(pass_conf, user.getUser_password()))
+		{
+			errors.put(PASSWORD_CONF_PFIELD, "Mot de passe incorrect .");
+			return false;
+		}
+		else
+			return true;
 	}
 	
 
