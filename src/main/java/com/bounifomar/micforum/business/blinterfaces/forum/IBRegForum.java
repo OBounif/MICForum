@@ -1,14 +1,14 @@
 package com.bounifomar.micforum.business.blinterfaces.forum;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
+
 
 public interface IBRegForum {
 	
 	
 	
-	public Boolean regForum(HttpServletRequest request,Model model);
+	public void regForum(String forum_titlep,String forum_descriptionp,String forum_visibilityp,String forum_fatherp,Model model);
 	
 	
 }
