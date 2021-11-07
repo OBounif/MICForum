@@ -2,7 +2,7 @@ package com.bounifomar.micforum.business.blexceptions;
 
 public class FormVException extends RuntimeException {
 
-	/**
+	/**s
 	 * 
 	 */
 	private static final long serialVersionUID = 1685713090247968857L;
